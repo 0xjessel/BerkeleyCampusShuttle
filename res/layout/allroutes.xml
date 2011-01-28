@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lay_wrapper"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+    <LinearLayout android:id="@+id/lay_action"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000" >
+        <TextView android:id="@+id/label_header"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+
+            android:text="@string/app_name"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:paddingLeft="10px"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical" 
+            />
+    </LinearLayout>
+    <RelativeLayout android:id="@+id/lay_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_below="@id/lay_action"
+        android:paddingTop="25px"
+        android:layout_centerInParent="true">
+
+        <Button android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="25dip"
+            android:drawableTop="@drawable/p" />
+
+        <Button android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/button1"
+            android:padding="25dip"
+            android:drawableTop="@drawable/r" />
+
+        <Button android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button1"
+            android:padding="25dip"
+            android:drawableTop="@drawable/c" />
+
+        <Button android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/button3"
+            android:layout_below="@id/button2"
+            android:padding="25dip"
+            android:drawableTop="@drawable/h" />
+    </RelativeLayout>
+</RelativeLayout>
