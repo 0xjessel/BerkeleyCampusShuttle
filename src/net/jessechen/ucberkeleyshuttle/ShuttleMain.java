@@ -22,5 +22,13 @@ public class ShuttleMain extends Activity {
         		startActivity(intent);
         	}
         });
+        
+        Button myButton2 = (Button) findViewById(R.id.my_button2);
+        myButton2.setOnClickListener(new OnClickListener() {
+        	public void onClick(View v) {
+        		Intent intent = new Intent(ShuttleMain.this, AllRoutes.class);
+        		startActivity(intent);
+        	}
+        });
     }
 }
