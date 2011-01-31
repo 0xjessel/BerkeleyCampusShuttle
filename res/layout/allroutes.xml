@@ -26,31 +26,31 @@
         android:paddingTop="25px"
         android:layout_centerInParent="true">
 
-        <Button android:id="@+id/button1"
+        <Button android:id="@+id/buttonP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="25dip"
             android:drawableTop="@drawable/p" />
 
-        <Button android:id="@+id/button2"
+        <Button android:id="@+id/buttonR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/button1"
+            android:layout_toRightOf="@id/buttonP"
             android:padding="25dip"
             android:drawableTop="@drawable/r" />
 
-        <Button android:id="@+id/button3"
+        <Button android:id="@+id/buttonC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/button1"
+            android:layout_below="@id/buttonP"
             android:padding="25dip"
             android:drawableTop="@drawable/c" />
 
-        <Button android:id="@+id/button4"
+        <Button android:id="@+id/buttonH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/button3"
-            android:layout_below="@id/button2"
+            android:layout_toRightOf="@id/buttonC"
+            android:layout_below="@id/buttonR"
             android:padding="25dip"
             android:drawableTop="@drawable/h" />
     </RelativeLayout>

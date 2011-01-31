@@ -4,13 +4,14 @@
     <string name="app_name">UC Berkeley Shuttle</string>
     <string name="my_button_text">All Stops</string>
     <string name="my_button2">All Routes</string>
+    <color name="titletextcolor">#FFFFFF</color>
     <string-array name="all_stops">
     	<item>Downtown Berkeley BART Station: Shattuck Ave and Addison St</item>
     	<item>Tolman Hall: Hearst Ave and Arch St</item>
-    	<item>Cory Hall: Heast Ave and LeRoy Ave</item>
+    	<item>Cory Hall: Hearst Ave and LeRoy Ave</item>
     	<item>Gayley and Stadium Rimway</item>
     	<item>International House: Piedmont Ave and Bancroft Way</item>
-    	<item>Heast Memorial Gym: Bancroft Way and Bowditch St</item>
+    	<item>Hearst Memorial Gym: Bancroft Way and Bowditch St</item>
     	<item>Recreational Sports Facility: Bancroft Way and Ellsworth St</item>
     	<item>Shattuck Ave and Kittredge St</item>
     	<item>Warren Hall: West Crescent Side</item>
@@ -37,5 +38,79 @@
     	<item>Underhill Lot: Channing Way and College Ave</item>
     	<item>Haas School of Business: Piedmont Ave side</item>
     	<item>East Gate Gayley Road and University Dr</item>
+    	<item>El Cerrito Plaza BART Station</item>
+    	<item>Richmond Field Station</item>
+    	<item>Regatta Facility</item>
+    	<item>Buchanon St and Jackson St (East)</item>
+    	<item>Hopkins St and MLK, Jr. Way</item>
+    	<item>Allston Way</item>
+    	<item>Buchanon and Jackson St (West)</item>
+    </string-array>    
+    <string-array name="h_stops">
+    	<item>Downtown Berkeley BART Station: Shattuck Ave and Addison St</item>
+    	<item>Evans Hall: Hearst Mining Circle Side</item>
+        <item>Strawberry Canyon Recreational Area (Uphill)</item>
+    	<item>UC Botanical Garden (Uphill)</item>
+    	<item>Lawrence Hall of Science (Uphill)</item>
+    	<item>Space Sciences Lab/MSRI (Uphill)</item>
+    	<item>Lawrence Hall of Science (Downhill)</item>
+    	<item>UC Botanical Garden (Downhill)</item>
+    	<item>Strawberry Canyon Recreational Area (Downhill)</item>
+   </string-array>
+    <string-array name="rfs_stops">
+    	<item>El Cerrito Plaza BART Station</item>
+    	<item>Richmond Field Station</item>
+    	<item>Regatta Facility</item>
+    	<item>Buchanon St and Jackson St (East)</item>
+    	<item>Hopkins St and MLK, Jr. Way</item>
+    	<item>Downtown Berkeley BART Station: Shattuck Ave and Addison St</item>
+    	<item>Evans Hall: Hearst Mining Circle Side</item>
+    	<item>University Hall: Oxford St and University Ave</item>
+    	<item>Allston Way</item>
+    	<item>Buchanon and Jackson St (West)</item>
     </string-array>
+    <string-array name="p_stops">
+    	<item>Downtown Berkeley BART Station: Shattuck Ave and Addison St</item>
+    	<item>Tolman Hall: Hearst Ave and Arch St</item>
+    	<item>Cory Hall: Hearst Ave and LeRoy Ave</item>
+    	<item>Gayley and Stadium Rimway</item>
+    	<item>International House: Piedmont Ave and Bancroft Way</item>
+    	<item>Hearst Memorial Gym: Bancroft Way and Bowditch St</item>
+    	<item>Recreational Sports Facility: Bancroft Way and Ellsworth St</item>
+    	<item>Shattuck Ave and Kittredge St</item>
+    </string-array>
+    <string-array name="r_stops">  
+    	<item>Downtown Berkeley BART Station: Shattuck Ave and Addison St</item>
+    	<item>University Hall: Addison Street side</item>
+    	<item>Oxford St and Kittredge St</item>
+    	<item>Durant Ave and Fulton St</item>
+    	<item>Durant Ave and Ellsworth St</item>
+    	<item>Durant Ave and Dana St</item>
+    	<item>Cleary Hall: 2424 Channing Way</item>
+    	<item>Channing Way and Bowditch St</item>
+    	<item>Underhill Lot: Channing Way and College Ave</item>
+    	<item>International House: Piedmont Ave and Bancroft Way</item>
+    	<item>Haas School of Business: Piedmont Ave side</item>
+    	<item>Gayley and Stadium Rimway</item>
+    	<item>Evans Hall: Hearst Mining Circle Side</item>
+    	<item>East Gate Gayley Road and University Dr</item>
+    	<item>Cory Hall: Hearst Ave and LeRoy Ave</item>
+    	<item>North Gate Hall: Hearst Ave and Euclid Ave</item>
+    	<item>Tolman Hall: Hearst Ave and Arch St</item>
+    	<item>Oxford St and Hearst Ave</item>
+    	<item>University Hall: Oxford St and University Ave</item>
+    </string-array>
+    <string-array name="c_stops">
+    	<item>Downtown Berkeley BART Station: Shattuck Ave and Addison St</item>
+    	<item>Warren Hall: West Crescent Side</item>
+    	<item>Life Science Addition: West Circle Side</item>
+    	<item>Moffitt Library: Memorial Glade Side</item>
+    	<item>Evans Hall: Hearst Mining Circle Side</item>
+    	<item>Cory Hall: Hearst Ave and LeRoy Ave</item>
+    	<item>North Gate Hall: Hearst Ave and Euclid Ave</item>
+    	<item>Tolman Hall: Hearst Ave and Arch St</item>
+    	<item>Oxford St and Kittredge St</item>
+    	<item>University Hall: Oxford St and University Ave</item>
+    </string-array>
+
 </resources>

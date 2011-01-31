@@ -19,5 +19,7 @@
     
 <activity android:name=".AllStops"></activity>
 <activity android:name=".AllRoutes"></activity>
+<activity android:name=".Stop"></activity>
+<activity android:name=".Route"></activity>
 </application>
 </manifest> 
