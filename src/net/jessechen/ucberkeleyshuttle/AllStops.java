@@ -11,16 +11,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class AllStops extends ListActivity {
+	
+	private String[] ALL_STOPS;
+	private ListView lv;
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        String[] ALL_STOPS = getResources().getStringArray(R.array.all_stops);
+        ALL_STOPS = getResources().getStringArray(R.array.all_stops);
         java.util.Arrays.sort(ALL_STOPS);
         setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, ALL_STOPS));
 
-        ListView lv = getListView();
+        lv = getListView();
         lv.setTextFilterEnabled(true);
 
         lv.setOnItemClickListener(new OnItemClickListener() {

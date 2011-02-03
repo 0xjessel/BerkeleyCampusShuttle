@@ -38,17 +38,18 @@ public final class R {
         public static final int lay_action=0x7f070001;
         public static final int lay_main=0x7f070003;
         public static final int lay_wrapper=0x7f070000;
-        public static final int myTitle=0x7f07000b;
+        public static final int list=0x7f07000b;
         public static final int my_button=0x7f070008;
         public static final int my_button2=0x7f070009;
-        public static final int title=0x7f07000a;
+        public static final int route_title=0x7f07000a;
+        public static final int stop_title=0x7f07000c;
     }
     public static final class layout {
         public static final int allroutes=0x7f030000;
         public static final int list_item=0x7f030001;
         public static final int main=0x7f030002;
-        public static final int stop=0x7f030003;
-        public static final int titlebar=0x7f030004;
+        public static final int route=0x7f030003;
+        public static final int stop=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f040001;
