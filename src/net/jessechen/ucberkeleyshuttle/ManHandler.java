@@ -5,13 +5,13 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class ManHandler extends DefaultHandler {
-	private boolean in_name = false;
-	private boolean in_hour = false;
-	private boolean in_minute = false;
 	private boolean correct_stop = false;
 	private boolean correct_hour = false;
+	private boolean correct_minute = false;
 	private boolean same_hour = false;
 
+	private String hour = null;
+	private StringBuilder buf = null;
 	private static String[] result;
 	
 	public static String[] getResult() {
@@ -33,65 +33,65 @@ public class ManHandler extends DefaultHandler {
 	public void startElement(String namespaceURI, String localName,
 			String qName, Attributes atts) throws SAXException {
 		if (localName.equals("minute")) {
-			this.in_minute = true;
+			buf = new StringBuilder();
 		} else if (localName.equals("name")) {
-			this.in_name = true;
+			buf = new StringBuilder();
 		} else if (localName.equals("hour")) {
-			this.in_hour = true;
+			hour = new String(atts.getValue("value"));
+			if (correct_stop && !correct_hour) {
+				int curHour = Integer.parseInt(Stop.getCurHour());
+				if (hour.equals((Stop.getCurHour()))) {
+					result[0] = hour.toString();
+					correct_hour = true;
+					same_hour = true;
+				} else if (Integer.parseInt(hour.toString()) > curHour) {
+					result[0] = hour.toString();
+					correct_hour = true;
+					same_hour = false;
+				}
+			}
+			hour = null;
 		}
 	}
 
 	@Override
 	public void characters(char ch[], int start, int length) {
-		String str = new String(ch);
-		if (in_name) {
-			if (str.equals(Stop.getBusStop())) { 
-				correct_stop = true; 
-			}
-		} else if (correct_stop) { // we are in the correct stop
-			String str2 = new String(ch, 0, 1);
-			int curHour = Integer.parseInt(Stop.getCurHour());
-			if (in_hour) { // looking at a hour
-				try {
-					if (str2.equals(Stop.getCurHour())) {
-						result[0] = str2;
-						correct_hour = true;
-						same_hour = true;
-					} else if (Integer.parseInt(str2) > curHour) {
-						result[0] = str2;
-						correct_hour = true;
-					} else if (correct_hour) {
-						if (in_minute) { 
-							int curMinute = Integer.parseInt(Stop.getCurMinute());
-							if (!same_hour) {
-								result[1] = str2; // get the first minute field
-							} else if (str2.equals(Stop.getCurMinute()) || 
-									Integer.parseInt(str2) > curMinute) {
-								result[1] = str2;
-							} 
-						}
-					}	
-				} catch (NumberFormatException e) {
-					
-				}
-			}
-		}
+	    if (buf != null) {
+	        for (int i = start; i < start + length; i++) {
+	            buf.append(ch[i]);
+	        }
+	    }
 	}
 	
 	@Override
 	public void endElement(String namespaceURI, String localName, String qName)
 			throws SAXException {
 		if (localName.equals("minute")) {
-			this.in_minute = false;
-		} else if (localName.equals("hour")) {
-			this.in_hour = false;
-		} else if (localName.equals("hour") && correct_hour) {
-			this.correct_hour = false;
+			if (correct_hour && !correct_minute) {
+				String curMinute = Stop.getCurMinute();
+				String minute = buf.toString();
+				if (!same_hour) {
+					result[1] = minute; // get the first minute field
+					correct_minute = true;
+				} else if (minute.equals(curMinute) || 
+						Integer.parseInt(minute) > Integer.parseInt(curMinute)) {
+					result[1] = minute;
+					correct_minute = true;
+				} 
+			}
+		} if (localName.equals("hour")) {
+			if (!correct_minute) {
+				same_hour = false;
+				correct_hour = false;
+			}
+		
 		} else if (localName.equals("name")) {
-			this.in_name = false;
+			if (buf.toString().equals(Stop.getBusStop())) {
+				correct_stop = true;
+			}
 		} else if (localName.equals("stop") && correct_stop) {
 			this.correct_stop = false;
 		}
-		 
+		buf = null;
 	}
 }

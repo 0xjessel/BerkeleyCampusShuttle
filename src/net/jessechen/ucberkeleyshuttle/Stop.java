@@ -13,6 +13,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.widget.TextView;
 
 public class Stop extends Activity {
@@ -23,12 +24,17 @@ public class Stop extends Activity {
 	private static Calendar calendar;
 	private static String curHour, curMinute;
 	private static TextView title;
+	private static TextView countdown;
+	private static String[] result = null;
+	private static int hourRemaining, minuteRemaining;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     
         setContentView(R.layout.stop);
+        //final TextView tv = new TextView(this);
+        //this.setContentView(tv);
         
         b = getIntent().getExtras();
         busStop = b.getCharSequence("stop");
@@ -37,8 +43,7 @@ public class Stop extends Activity {
         calendar = Calendar.getInstance();
         curHour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
         curMinute = Integer.toString(calendar.get(Calendar.MINUTE));
-        
-        String[] result = null;        
+            
         try {
 			result = getEventsFromAnXML(this, b.getInt("xml"), busStop);
 		} catch (XmlPullParserException e) {
@@ -48,12 +53,38 @@ public class Stop extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-        title = (TextView) findViewById(R.id.stop_title);
-        title.setText(routeName + ": Predictions for " + busStop + " next one in " 
-        		+ (Integer.parseInt(result[0]) - Integer.parseInt(curHour)) + ":" 
-        		+ (Integer.parseInt(result[1]) - Integer.parseInt(curMinute)));
 		
+		/* TODO: Shuttles only run M-F, have to check what day it is */
+        title = (TextView) findViewById(R.id.stop_title);
+        title.setText(routeName + ": Predictions for " + busStop + ": " + hourRemaining 
+        		+ " hours and " + minuteRemaining + " minutes");
+        
+		if (result[0] != null && result[1] != null) {
+			hourRemaining = Integer.parseInt(result[0]) - Integer.parseInt(curHour);
+			minuteRemaining = Integer.parseInt(result[1]) - Integer.parseInt(curMinute);
+			
+			countdown = (TextView) findViewById(R.id.countdown);
+			MyCount counter = new MyCount(hourRemaining * 3600000 + minuteRemaining * 60000, 1000);
+			counter.start();      
+		} else {
+			// no more for the day
+		}
+    }
+    
+    public class MyCount extends CountDownTimer {
+    	public MyCount(long millisInFuture, long countDownInterval) {
+    		super(millisInFuture, countDownInterval);
+    	}
+
+		@Override
+		public void onFinish() {
+            countdown.setText("done!");
+		}
+
+		@Override
+		public void onTick(long millisUntilFinished) {
+            countdown.setText("seconds remaining: " + millisUntilFinished / 1000);
+		}
     }
     
     private String[] getEventsFromAnXML(Activity activity, int xml, CharSequence stop) throws XmlPullParserException, IOException {
@@ -77,8 +108,6 @@ public class Stop extends Activity {
 		} catch (Exception FileNotFoundException) {
 			FileNotFoundException.printStackTrace();
 		}
-		result[0] = "3";
-		result[1] = "4";
 		return result;
     }
     

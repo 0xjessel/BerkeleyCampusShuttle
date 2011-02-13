@@ -34,6 +34,7 @@ public final class R {
         public static final int buttonH=0x7f080007;
         public static final int buttonP=0x7f080004;
         public static final int buttonR=0x7f080005;
+        public static final int countdown=0x7f08000d;
         public static final int label_header=0x7f080002;
         public static final int lay_action=0x7f080001;
         public static final int lay_main=0x7f080003;

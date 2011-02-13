@@ -10,5 +10,10 @@
 		android:id="@+id/stop_title"
 		android:gravity="center_horizontal"
 		android:textSize="20dp" />
+		
+	<TextView
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:id="@+id/countdown" />
 
 </LinearLayout>
