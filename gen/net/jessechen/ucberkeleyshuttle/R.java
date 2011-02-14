@@ -42,6 +42,7 @@ public final class R {
         public static final int list=0x7f08000b;
         public static final int my_button=0x7f080008;
         public static final int my_button2=0x7f080009;
+        public static final int refresh=0x7f08000e;
         public static final int route_title=0x7f08000a;
         public static final int stop_title=0x7f08000c;
     }

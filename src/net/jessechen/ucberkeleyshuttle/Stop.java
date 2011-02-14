@@ -14,6 +14,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Stop extends Activity {
@@ -25,49 +28,57 @@ public class Stop extends Activity {
 	private static String curHour, curMinute;
 	private static TextView title;
 	private static TextView countdown;
-	private static String[] result = null;
+	private static String[] result;
 	private static int hourRemaining, minuteRemaining;
+	private MyCount counter;
+	private static Button refreshButton;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     
         setContentView(R.layout.stop);
-        //final TextView tv = new TextView(this);
-        //this.setContentView(tv);
         
         b = getIntent().getExtras();
         busStop = b.getCharSequence("stop");
         routeName = b.getCharSequence("route");
-
+		
+		/* TODO: Shuttles only run M-F, have to check what day it is */
+        title = (TextView) findViewById(R.id.stop_title);
+        title.setText(routeName + ": Predictions for " + busStop);
+        
+        refresh();
+        
+		refreshButton = (Button) findViewById(R.id.refresh);
+        refreshButton.setOnClickListener(new OnClickListener() {
+        	public void onClick(View v) {
+        		refresh();
+        	}
+        });
+    }
+    
+	public void refresh() { // TODO: grab the next 3 predictions rather than just 1
         calendar = Calendar.getInstance();
         curHour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
         curMinute = Integer.toString(calendar.get(Calendar.MINUTE));
             
         try {
-			result = getEventsFromAnXML(this, b.getInt("xml"), busStop);
+			result = getEventsFromAnXML(this, b.getInt("xml"), busStop); 
 		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		countdown = (TextView) findViewById(R.id.countdown);
 		
-		/* TODO: Shuttles only run M-F, have to check what day it is */
-        title = (TextView) findViewById(R.id.stop_title);
-        title.setText(routeName + ": Predictions for " + busStop + ": " + hourRemaining 
-        		+ " hours and " + minuteRemaining + " minutes");
-        
 		if (result[0] != null && result[1] != null) {
 			hourRemaining = Integer.parseInt(result[0]) - Integer.parseInt(curHour);
 			minuteRemaining = Integer.parseInt(result[1]) - Integer.parseInt(curMinute);
-			
-			countdown = (TextView) findViewById(R.id.countdown);
-			MyCount counter = new MyCount(hourRemaining * 3600000 + minuteRemaining * 60000, 1000);
+
+			counter = new MyCount(hourRemaining * 3600000 + minuteRemaining * 60000, 1000);
 			counter.start();      
 		} else {
-			// no more for the day
+			countdown.setText("No more predictions for the day");
 		}
     }
     
@@ -78,12 +89,12 @@ public class Stop extends Activity {
 
 		@Override
 		public void onFinish() {
-            countdown.setText("done!");
+			Stop.this.refresh();
 		}
 
 		@Override
 		public void onTick(long millisUntilFinished) {
-            countdown.setText("seconds remaining: " + millisUntilFinished / 1000);
+            countdown.setText(millisUntilFinished / 60000 + " minutes remaining (at " + result[0] + ":" + result[1] + ")");
 		}
     }
     
@@ -91,7 +102,7 @@ public class Stop extends Activity {
 		InputStream istream = null;
 		String[] result = null;
 		try {
-			istream = activity.getResources().openRawResource(R.raw.ptimes);
+			istream = activity.getResources().openRawResource(xml);
 
 			/* Get a SAXParser from the SAXPArserFactory. */
 			SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -110,8 +121,15 @@ public class Stop extends Activity {
 		}
 		return result;
     }
-    
-    public static CharSequence getBusStop() {
+
+    public void onDestroy() {
+    	super.onDestroy();
+    	if (counter != null) {
+    		counter.cancel();
+    	}
+    }
+
+	public static CharSequence getBusStop() {
     	return busStop;
     }
     
