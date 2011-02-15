@@ -1,95 +1,364 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stop> 
-	<name>Downtown Berkeley BART Station: Shattuck Avenue @ Addison Street</name>
-
-	<hour>6
-		<minute>48</minute>
-	</hour>
-	<hour>7
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>8
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>9
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>10
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>11
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>12
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>13
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>14
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>15
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>16
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>17
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>16
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>17
-		<minute>00</minute>
-	</hour>
-</stop>
+<root>
+	<stop> 
+    	<name>Downtown Berkeley BART Station: Shattuck Ave and Addison St</name>
+    	<hour value="7">
+    		<minute>35</minute>
+    		<minute>55</minute>
+    	</hour>
+    	<hour value="8">
+    		<minute>15</minute>
+    		<minute>35</minute>
+    		<minute>55</minute>
+    	</hour>
+    	<hour value="9">
+    		<minute>15</minute>
+    		<minute>35</minute>
+    		<minute>55</minute>
+    	</hour>
+    	<hour value="10">
+    		<minute>15</minute>
+    		<minute>35</minute>
+    		<minute>55</minute>
+    	</hour>
+    	<hour value="11">
+    		<minute>15</minute>
+    		<minute>35</minute>
+    		<minute>55</minute>
+    	</hour>
+    	<hour value="12">
+    		<minute>15</minute>
+    		<minute>35</minute>
+    		<minute>55</minute>
+    	</hour>
+    	<hour value="13">
+    		<minute>15</minute>
+    		<minute>35</minute>
+    	</hour>
+    </stop>
+    <stop>
+    	<name>Warren Hall: West Crescent Side</name>
+    	<hour value="7">
+    		<minute>37</minute>
+    		<minute>57</minute>
+    	</hour>
+    	<hour value="8">
+    		<minute>17</minute>
+    		<minute>37</minute>
+    		<minute>57</minute>
+    	</hour>
+    	<hour value="9">
+    		<minute>17</minute>
+    		<minute>37</minute>
+    		<minute>57</minute>
+    	</hour>
+    	<hour value="10">
+    		<minute>17</minute>
+    		<minute>37</minute>
+    		<minute>57</minute>
+    	</hour>
+    	<hour value="11">
+    		<minute>17</minute>
+    		<minute>37</minute>
+    		<minute>57</minute>
+    	</hour>
+    	<hour value="12">
+    		<minute>17</minute>
+    		<minute>37</minute>
+    		<minute>57</minute>
+    	</hour>
+    	<hour value="13">
+    		<minute>17</minute>
+    		<minute>37</minute>
+    	</hour>
+    </stop>
+    <stop>
+    	<name>Life Science Addition: West Circle Side</name>
+    	<hour value="7">
+    		<minute>38</minute>
+    		<minute>58</minute>
+    	</hour>
+    	<hour value="8">
+    		<minute>18</minute>
+    		<minute>38</minute>
+    		<minute>58</minute>
+    	</hour>
+    	<hour value="9">
+    		<minute>18</minute>
+    		<minute>38</minute>
+    		<minute>58</minute>
+    	</hour>
+    	<hour value="10">
+    		<minute>18</minute>
+    		<minute>38</minute>
+    		<minute>58</minute>
+    	</hour>
+    	<hour value="11">
+    		<minute>18</minute>
+    		<minute>38</minute>
+    		<minute>58</minute>
+    	</hour>
+    	<hour value="12">
+    		<minute>18</minute>
+    		<minute>38</minute>
+    		<minute>58</minute>
+    	</hour>
+    	<hour value="13">
+    		<minute>18</minute>
+    		<minute>38</minute>
+    	</hour>
+    </stop>
+    <stop>
+    	<name>Moffitt Library: Memorial Glade Side</name>
+    	<hour value="7">
+    		<minute>39</minute>
+    		<minute>59</minute>
+    	</hour>
+    	<hour value="8">
+    		<minute>19</minute>
+    		<minute>39</minute>
+    		<minute>59</minute>
+    	</hour>
+    	<hour value="9">
+    		<minute>19</minute>
+    		<minute>39</minute>
+    		<minute>59</minute>
+    	</hour>
+    	<hour value="10">
+    		<minute>19</minute>
+    		<minute>39</minute>
+    		<minute>59</minute>
+    	</hour>
+    	<hour value="11">
+    		<minute>19</minute>
+    		<minute>39</minute>
+    		<minute>59</minute>
+    	</hour>
+    	<hour value="12">
+    		<minute>19</minute>
+    		<minute>39</minute>
+    		<minute>59</minute>
+    	</hour>
+    	<hour value="13">
+    		<minute>19</minute>
+    		<minute>39</minute>
+    	</hour>
+    </stop>
+    <stop>    	
+    	<name>Evans Hall: Hearst Mining Circle Side</name>
+    	<hour value="7">
+    		<minute>45</minute>
+    	</hour>
+    	<hour value="8">
+    		<minute>5</minute>
+    		<minute>25</minute>
+    		<minute>45</minute>
+    	</hour>
+    	<hour value="9">
+    		<minute>5</minute>
+    		<minute>25</minute>
+    		<minute>45</minute>
+    	</hour>
+    	<hour value="10">
+    		<minute>5</minute>
+    		<minute>25</minute>
+    		<minute>45</minute>
+    	</hour>
+    	<hour value="11">
+    		<minute>5</minute>
+    		<minute>25</minute>
+    		<minute>45</minute>
+    	</hour>
+    	<hour value="12">
+    		<minute>5</minute>
+    		<minute>25</minute>
+    		<minute>45</minute>
+    	</hour>
+    	<hour value="13">
+    		<minute>5</minute>
+    		<minute>25</minute>
+    		<minute>45</minute>
+    	</hour>
+    </stop>
+    <stop>
+    	<name>Cory Hall: Hearst Ave and LeRoy Ave</name>
+    	<hour value="7">
+    		<minute>47</minute>
+    	</hour>
+    	<hour value="8">
+    		<minute>7</minute>
+    		<minute>27</minute>
+    		<minute>47</minute>
+    	</hour>
+    	<hour value="9">
+    		<minute>7</minute>
+    		<minute>27</minute>
+    		<minute>47</minute>
+    	</hour>
+    	<hour value="10">
+    		<minute>7</minute>
+    		<minute>27</minute>
+    		<minute>47</minute>
+    	</hour>
+    	<hour value="11">
+    		<minute>7</minute>
+    		<minute>27</minute>
+    		<minute>47</minute>
+    	</hour>
+    	<hour value="12">
+    		<minute>7</minute>
+    		<minute>27</minute>
+    		<minute>47</minute>
+    	</hour>
+    	<hour value="13">
+    		<minute>7</minute>
+    		<minute>27</minute>
+    		<minute>47</minute>
+    	</hour>
+    </stop>
+    <stop>
+    	<name>North Gate Hall: Hearst Ave and Euclid Ave</name>
+    	<hour value="7">
+    		<minute>48</minute>
+    	</hour>
+    	<hour value="8">
+    		<minute>8</minute>
+    		<minute>28</minute>
+    		<minute>48</minute>
+    	</hour>
+    	<hour value="9">
+    		<minute>8</minute>
+    		<minute>28</minute>
+    		<minute>48</minute>
+    	</hour>
+    	<hour value="10">
+    		<minute>8</minute>
+    		<minute>28</minute>
+    		<minute>48</minute>
+    	</hour>
+    	<hour value="11">
+    		<minute>8</minute>
+    		<minute>28</minute>
+    		<minute>48</minute>
+    	</hour>
+    	<hour value="12">
+    		<minute>8</minute>
+    		<minute>28</minute>
+    		<minute>48</minute>
+    	</hour>
+    	<hour value="13">
+    		<minute>8</minute>
+    		<minute>28</minute>
+    		<minute>48</minute>
+    	</hour>
+    </stop>
+    <stop>    	
+    	<name>Tolman Hall: Hearst Ave and Arch St</name>
+    	<hour value="7">
+    		<minute>49</minute>
+    	</hour>
+    	<hour value="8">
+    		<minute>9</minute>
+    		<minute>29</minute>
+    		<minute>49</minute>
+    	</hour>
+    	<hour value="9">
+    		<minute>9</minute>
+    		<minute>29</minute>
+    		<minute>49</minute>
+    	</hour>
+    	<hour value="10">
+    		<minute>9</minute>
+    		<minute>29</minute>
+    		<minute>49</minute>
+    	</hour>
+    	<hour value="11">
+    		<minute>9</minute>
+    		<minute>29</minute>
+    		<minute>49</minute>
+    	</hour>
+    	<hour value="12">
+    		<minute>9</minute>
+    		<minute>29</minute>
+    		<minute>49</minute>
+    	</hour>
+    	<hour value="13">
+    		<minute>9</minute>
+    		<minute>29</minute>
+    		<minute>49</minute>
+    	</hour>
+    </stop>
+    <stop>    	
+    	<name>Oxford St and Kittredge St</name>
+    	<hour value="7">
+    		<minute>51</minute>
+    	</hour>
+    	<hour value="8">
+    		<minute>11</minute>
+    		<minute>31</minute>
+    		<minute>51</minute>
+    	</hour>
+    	<hour value="9">
+    		<minute>11</minute>
+    		<minute>31</minute>
+    		<minute>51</minute>
+    	</hour>
+    	<hour value="10">
+    		<minute>11</minute>
+    		<minute>31</minute>
+    		<minute>51</minute>
+    	</hour>
+    	<hour value="11">
+    		<minute>11</minute>
+    		<minute>31</minute>
+    		<minute>51</minute>
+    	</hour>
+    	<hour value="12">
+    		<minute>11</minute>
+    		<minute>31</minute>
+    		<minute>51</minute>
+    	</hour>
+    	<hour value="13">
+    		<minute>11</minute>
+    		<minute>31</minute>
+    		<minute>51</minute>
+    	</hour>
+    </stop>
+    <stop>    	
+    	<name>University Hall: Oxford St and University Ave</name>
+    	<hour value="7">
+    		<minute>52</minute>
+    	</hour>
+    	<hour value="8">
+    		<minute>12</minute>
+    		<minute>32</minute>
+    		<minute>52</minute>
+    	</hour>
+    	<hour value="9">
+    		<minute>12</minute>
+    		<minute>32</minute>
+    		<minute>52</minute>
+    	</hour>
+    	<hour value="10">
+    		<minute>12</minute>
+    		<minute>32</minute>
+    		<minute>52</minute>
+    	</hour>
+    	<hour value="11">
+    		<minute>12</minute>
+    		<minute>32</minute>
+    		<minute>52</minute>
+    	</hour>
+    	<hour value="12">
+    		<minute>12</minute>
+    		<minute>32</minute>
+    		<minute>52</minute>
+    	</hour>
+    	<hour value="13">
+    		<minute>12</minute>
+    		<minute>32</minute>
+    		<minute>52</minute>
+    	</hour>
+    </stop>	
+</root>
+    	

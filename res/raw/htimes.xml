@@ -1,95 +1,423 @@
 <?xml version="1.0" encoding="utf-8"?>
-<stop> 
-	<name>Downtown Berkeley BART Station: Shattuck Avenue @ Addison Street</name>
-
-	<hour>6
-		<minute>48</minute>
-	</hour>
-	<hour>7
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>8
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>9
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>10
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>11
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>12
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>13
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>14
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>15
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>16
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>17
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>16
-		<minute>00</minute>
-		<minute>12</minute>
-		<minute>24</minute>
-		<minute>36</minute>
-		<minute>48</minute>
-	</hour>
-	<hour>17
-		<minute>00</minute>
-	</hour>
-</stop>
+<root>
+	<stop>
+   		<name>Downtown Berkeley BART Station: Shattuck Ave and Addison St</name>
+   		<hour value="7">
+   			<minute>35</minute>
+   		</hour>
+    </stop>
+    <stop>
+    	<name>Evans Hall: Hearst Mining Circle Side</name>
+   		<hour value="7">
+   			<minute>40</minute>
+   		</hour>
+   		<hour value="8">
+   			<minute>10</minute>
+   			<minute>40</minute> 			
+   		</hour>
+   		<hour value="9">
+   			<minute>10</minute>
+   			<minute>40</minute> 				
+   		</hour>
+   		<hour value="10">
+   			<minute>10</minute>
+   			<minute>40</minute> 				
+   		</hour>
+   		<hour value="11">
+   			<minute>10</minute>
+   			<minute>40</minute> 				
+   		</hour>
+   		<hour value="12">
+   			<minute>10</minute>
+   			<minute>40</minute> 					
+   		</hour>
+   		<hour value="13">
+   			<minute>10</minute>
+   			<minute>40</minute>
+   		</hour> 	
+   		<hour value="14">
+   			<minute>10</minute>
+   			<minute>40</minute> 	
+   		</hour> 	
+   		<hour value="15">
+   			<minute>10</minute>
+   			<minute>40</minute> 	
+   		</hour> 	
+   		<hour value="16">
+   			<minute>10</minute>
+   			<minute>40</minute> 	
+   		</hour> 	
+   		<hour value="17">
+   			<minute>10</minute>
+   			<minute>40</minute> 		
+   		</hour>
+   		<hour value="18">
+   			<minute>10</minute>	
+   		</hour>
+   		<hour value="19">
+   			<minute>0</minute>
+   		</hour>
+    </stop>
+    <stop>
+        <name>Strawberry Canyon Recreational Area (Uphill)</name>
+   		<hour value="7">
+   			<minute>45</minute>
+   		</hour>
+   		<hour value="8">
+   			<minute>15</minute>
+   			<minute>45</minute> 			
+   		</hour>
+   		<hour value="9">
+   			<minute>15</minute>
+   			<minute>45</minute> 				
+   		</hour>
+   		<hour value="10">
+   			<minute>15</minute>
+   			<minute>45</minute> 				
+   		</hour>
+   		<hour value="11">
+   			<minute>15</minute>
+   			<minute>45</minute> 				
+   		</hour>
+   		<hour value="12">
+   			<minute>15</minute>
+   			<minute>45</minute> 						
+   		</hour>
+   		<hour value="13">
+   			<minute>15</minute>
+   			<minute>45</minute> 		
+   		</hour> 	
+   		<hour value="14">
+   			<minute>15</minute>
+   			<minute>45</minute> 		
+   		</hour> 	
+   		<hour value="15">
+   			<minute>15</minute>
+   			<minute>45</minute> 		
+   		</hour> 	
+   		<hour value="16">
+   			<minute>15</minute>
+   			<minute>45</minute> 		
+   		</hour> 	
+   		<hour value="17">
+   			<minute>15</minute>
+   			<minute>45</minute> 			
+   		</hour>
+   		<hour value="18">
+   			<minute>15</minute>	
+   		</hour>
+   		<hour value="19">
+   			<minute>2</minute>
+   		</hour>
+    </stop>
+    <stop>
+        <name>UC Botanical Garden (Uphill)</name>
+   		<hour value="7">
+   			<minute>47</minute>
+   		</hour>
+   		<hour value="8">
+   			<minute>17</minute>
+   			<minute>47</minute> 			
+   		</hour>
+   		<hour value="9">
+   			<minute>17</minute>
+   			<minute>47</minute> 				
+   		</hour>
+   		<hour value="10">
+   			<minute>17</minute>
+   			<minute>47</minute> 					
+   		</hour>
+   		<hour value="11">
+   			<minute>17</minute>
+   			<minute>47</minute> 					
+   		</hour>
+   		<hour value="12">
+   			<minute>17</minute>
+   			<minute>47</minute> 							
+   		</hour>
+   		<hour value="13">
+   			<minute>17</minute>
+   			<minute>47</minute> 			
+   		</hour> 	
+   		<hour value="14">
+   			<minute>17</minute>
+   			<minute>47</minute> 			
+   		</hour> 	
+   		<hour value="15">
+   			<minute>17</minute>
+   			<minute>47</minute> 				
+   		</hour> 	
+   		<hour value="16">
+   			<minute>17</minute>
+   			<minute>47</minute> 				
+   		</hour> 	
+   		<hour value="17">
+   			<minute>17</minute>
+   			<minute>47</minute> 					
+   		</hour>
+   		<hour value="18">
+   			<minute>17</minute>	
+   		</hour>
+   		<hour value="19">
+   			<minute>4</minute>
+   		</hour>
+    </stop>
+    <stop>
+        <name>Lawrence Hall of Science (Uphill)</name>
+   		<hour value="7">
+   			<minute>49</minute>
+   		</hour>
+   		<hour value="8">
+   			<minute>19</minute>
+   			<minute>49</minute> 			
+   		</hour>
+   		<hour value="9">
+   			<minute>19</minute>
+   			<minute>49</minute> 				
+   		</hour>
+   		<hour value="10">
+   			<minute>19</minute>
+   			<minute>49</minute> 				
+   		</hour>
+   		<hour value="11">
+   			<minute>19</minute>
+   			<minute>49</minute> 			
+   		</hour>
+   		<hour value="12">
+   			<minute>19</minute>
+   			<minute>49</minute> 							
+   		</hour>
+   		<hour value="13">
+   			<minute>19</minute>
+   			<minute>49</minute> 			
+   		</hour> 	
+   		<hour value="14">
+   			<minute>19</minute>
+   			<minute>49</minute> 			
+   		</hour> 	
+   		<hour value="15">
+   			<minute>19</minute>
+   			<minute>49</minute> 			
+   		</hour> 	
+   		<hour value="16">
+   			<minute>19</minute>
+   			<minute>49</minute> 		
+   		</hour> 	
+   		<hour value="17">
+   			<minute>19</minute>
+   			<minute>49</minute> 				
+   		</hour>
+   		<hour value="18">
+   			<minute>19</minute>	
+   		</hour>
+   		<hour value="19">
+   			<minute>6</minute>
+   		</hour>
+    </stop>
+    <stop>
+        <name>Space Sciences Lab/MSRI (Uphill)</name>
+   		<hour value="7">
+   			<minute>55</minute>
+   		</hour>
+   		<hour value="8">
+   			<minute>25</minute>
+   			<minute>55</minute> 			
+   		</hour>
+   		<hour value="9">
+   			<minute>25</minute>
+   			<minute>55</minute> 			
+   		</hour>
+   		<hour value="10">
+   			<minute>25</minute>
+   			<minute>55</minute> 					
+   		</hour>
+   		<hour value="11">
+   			<minute>25</minute>
+   			<minute>55</minute> 					
+   		</hour>
+   		<hour value="12">
+   			<minute>25</minute>
+   			<minute>55</minute> 								
+   		</hour>
+   		<hour value="13">
+   			<minute>25</minute>
+   			<minute>55</minute> 				
+   		</hour> 	
+   		<hour value="14">
+   			<minute>25</minute>
+   			<minute>55</minute> 			
+   		</hour> 	
+   		<hour value="15">
+   			<minute>25</minute>
+   			<minute>55</minute> 		
+   		</hour> 	
+   		<hour value="16">
+   			<minute>25</minute>
+   			<minute>55</minute> 		
+   		</hour> 	
+   		<hour value="17">
+   			<minute>25</minute>
+   			<minute>55</minute> 			
+   		</hour>
+   		<hour value="18">
+   			<minute>25</minute>	
+   		</hour>
+   		<hour value="19">
+   			<minute>15</minute>
+   		</hour>
+    </stop>
+    <stop>
+        <name>Lawrence Hall of Science (Downhill)</name>
+   		<hour value="7">
+   			<minute>57</minute>
+   		</hour>
+   		<hour value="8">
+   			<minute>27</minute>
+   			<minute>57</minute> 			
+   		</hour>
+   		<hour value="9">
+   			<minute>27</minute>
+   			<minute>57</minute> 				
+   		</hour>
+   		<hour value="10">
+   			<minute>27</minute>
+   			<minute>57</minute> 						
+   		</hour>
+   		<hour value="11">
+   			<minute>27</minute>
+   			<minute>57</minute> 						
+   		</hour>
+   		<hour value="12">
+   			<minute>27</minute>
+   			<minute>57</minute> 								
+   		</hour>
+   		<hour value="13">
+   			<minute>27</minute>
+   			<minute>57</minute> 				
+   		</hour> 	
+   		<hour value="14">
+   			<minute>27</minute>
+   			<minute>57</minute> 			
+   		</hour> 	
+   		<hour value="15">
+   			<minute>27</minute>
+   			<minute>57</minute> 		
+   		</hour> 	
+   		<hour value="16">
+   			<minute>27</minute>
+   			<minute>57</minute> 		
+   		</hour> 	
+   		<hour value="17">
+   			<minute>27</minute>
+   			<minute>57</minute> 			
+   		</hour>
+   		<hour value="18">
+   			<minute>27</minute>	
+   		</hour>
+   		<hour value="19">
+   			<minute>17</minute>
+   		</hour>
+    </stop>
+    <stop>
+        <name>UC Botanical Garden (Downhill)</name>
+   		<hour value="7">
+   			<minute>59</minute>
+   		</hour>
+   		<hour value="8">
+   			<minute>29</minute>
+   			<minute>59</minute> 			
+   		</hour>
+   		<hour value="9">
+   			<minute>29</minute>
+   			<minute>59</minute> 				
+   		</hour>
+   		<hour value="10">
+   			<minute>29</minute>
+   			<minute>59</minute> 							
+   		</hour>
+   		<hour value="11">
+   			<minute>29</minute>
+   			<minute>59</minute> 							
+   		</hour>
+   		<hour value="12">
+   			<minute>29</minute>
+   			<minute>59</minute> 										
+   		</hour>
+   		<hour value="13">
+   			<minute>29</minute>
+   			<minute>59</minute> 						
+   		</hour> 	
+   		<hour value="14">
+   			<minute>29</minute>
+   			<minute>59</minute> 					
+   		</hour> 	
+   		<hour value="15">
+   			<minute>29</minute>
+   			<minute>59</minute> 			
+   		</hour> 	
+   		<hour value="16">
+   			<minute>29</minute>
+   			<minute>59</minute> 			
+   		</hour> 	
+   		<hour value="17">
+   			<minute>29</minute>
+   			<minute>59</minute> 				
+   		</hour>
+   		<hour value="18">
+   			<minute>29</minute>	
+   		</hour>
+   		<hour value="19">
+   			<minute>19</minute>
+   		</hour>
+    </stop>
+    <stop>
+        <name>Strawberry Canyon Recreational Area (Downhill)</name>
+   		<hour value="8">
+   			<minute>1</minute>
+   			<minute>31</minute>	
+   		</hour>
+   		<hour value="9">
+   			<minute>1</minute>
+   			<minute>31</minute>				
+   		</hour>
+   		<hour value="10">
+   			<minute>1</minute>
+   			<minute>31</minute>							
+   		</hour>
+   		<hour value="11">
+   			<minute>1</minute>
+   			<minute>31</minute>							
+   		</hour>
+   		<hour value="12">
+   			<minute>1</minute>
+   			<minute>31</minute>											
+   		</hour>
+   		<hour value="13">
+   			<minute>1</minute>
+   			<minute>31</minute>						
+   		</hour> 	
+   		<hour value="14">
+   			<minute>1</minute>
+   			<minute>31</minute>						
+   		</hour> 	
+   		<hour value="15">
+   			<minute>1</minute>
+   			<minute>31</minute>				
+   		</hour> 	
+   		<hour value="16">
+   			<minute>1</minute>
+   			<minute>31</minute>			
+   		</hour> 	
+   		<hour value="17">
+   			<minute>1</minute>
+   			<minute>31</minute>				
+   		</hour>
+   		<hour value="18">
+   			<minute>1</minute>
+   			<minute>31</minute>	
+   		</hour>
+   		<hour value="19">
+   			<minute>21</minute>
+   		</hour>
+   	</stop>
+</root>
