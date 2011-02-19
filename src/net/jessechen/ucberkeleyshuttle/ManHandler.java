@@ -10,18 +10,18 @@ public class ManHandler extends DefaultHandler {
 	private boolean correct_minute = false;
 	private boolean same_hour = false;
 
-	private String hour = null;
+	private int hour = -1;
 	private StringBuilder buf = null;
-	private static String[] result;
+	private static int[] result;
 	
-	public static String[] getResult() {
+	public static int[] getResult() {
 		return result;
 	}
 	
 	@Override
 	public void startDocument() throws SAXException {
 		// Some sort of setting up work
-		result = new String[2];
+		result = new int[2];
 	}
 
 	@Override
@@ -37,20 +37,20 @@ public class ManHandler extends DefaultHandler {
 		} else if (localName.equals("name")) {
 			buf = new StringBuilder();
 		} else if (localName.equals("hour")) {
-			hour = new String(atts.getValue("value"));
+			hour = Integer.parseInt(atts.getValue("value"));
 			if (correct_stop && !correct_hour) {
-				int curHour = Integer.parseInt(Stop.getCurHour());
-				if (hour.equals((Stop.getCurHour()))) {
-					result[0] = hour.toString();
+				int curHour = Stop.getCurHour();
+				if (hour == curHour) {
+					result[0] = hour;
 					correct_hour = true;
 					same_hour = true;
-				} else if (Integer.parseInt(hour.toString()) > curHour) {
-					result[0] = hour.toString();
+				} else if (hour > curHour) {
+					result[0] = hour;
 					correct_hour = true;
 					same_hour = false;
 				}
 			}
-			hour = null;
+			hour = -1;
 		}
 	}
 
@@ -68,13 +68,12 @@ public class ManHandler extends DefaultHandler {
 			throws SAXException {
 		if (localName.equals("minute")) {
 			if (correct_hour && !correct_minute) {
-				String curMinute = Stop.getCurMinute();
-				String minute = buf.toString();
+				int curMinute = Stop.getCurMinute();
+				int minute = Integer.parseInt(buf.toString());
 				if (!same_hour) {
 					result[1] = minute; // get the first minute field
 					correct_minute = true;
-				} else if (minute.equals(curMinute) || 
-						Integer.parseInt(minute) > Integer.parseInt(curMinute)) {
+				} else if (minute == curMinute || minute > curMinute) {
 					result[1] = minute;
 					correct_minute = true;
 				} 
