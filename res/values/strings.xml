@@ -2,9 +2,9 @@
 <resources>
     <string name="hello">Hello World, ShuttleMain!</string>
     <string name="app_name">UC Berkeley Shuttle</string>
+    <string name="all_routes">All Routes</string>
     <string name="my_button_text">All Stops</string>
     <string name="my_button2">All Routes</string>
-    <color name="titletextcolor">#FFFFFF</color>
     <string-array name="all_stops">
     	<item>Downtown Berkeley BART Station: Shattuck Ave and Addison St</item>
     	<item>Tolman Hall: Hearst Ave and Arch St</item>
