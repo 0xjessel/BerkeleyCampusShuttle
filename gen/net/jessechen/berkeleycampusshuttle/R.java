@@ -20,28 +20,30 @@ public final class R {
     }
     public static final class drawable {
         public static final int c=0x7f020000;
-        public static final int h=0x7f020001;
-        public static final int icon=0x7f020002;
-        public static final int p=0x7f020003;
-        public static final int r=0x7f020004;
-        public static final int rfs=0x7f020005;
+        public static final int cal_logo=0x7f020001;
+        public static final int h=0x7f020002;
+        public static final int icon=0x7f020003;
+        public static final int p=0x7f020004;
+        public static final int r=0x7f020005;
+        public static final int rfs=0x7f020006;
     }
     public static final class id {
         public static final int buttonC=0x7f070006;
         public static final int buttonH=0x7f070007;
         public static final int buttonP=0x7f070004;
         public static final int buttonR=0x7f070005;
-        public static final int countdown=0x7f07000d;
+        public static final int cal_logo=0x7f070008;
+        public static final int countdown=0x7f07000e;
         public static final int label_header=0x7f070002;
         public static final int lay_action=0x7f070001;
         public static final int lay_main=0x7f070003;
         public static final int lay_wrapper=0x7f070000;
-        public static final int list=0x7f07000b;
-        public static final int my_button=0x7f070008;
-        public static final int my_button2=0x7f070009;
-        public static final int refresh=0x7f07000e;
-        public static final int route_title=0x7f07000a;
-        public static final int stop_title=0x7f07000c;
+        public static final int list=0x7f07000c;
+        public static final int my_button=0x7f070009;
+        public static final int my_button2=0x7f07000a;
+        public static final int refresh=0x7f07000f;
+        public static final int route_title=0x7f07000b;
+        public static final int stop_title=0x7f07000d;
     }
     public static final class layout {
         public static final int allroutes=0x7f030000;

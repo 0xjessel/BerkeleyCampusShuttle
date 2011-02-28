@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, ShuttleMain!</string>
-    <string name="app_name">UC Berkeley Shuttle</string>
+    <string name="app_name">Berkeley Campus Shuttle</string>
     <string name="all_routes">All Routes</string>
     <string name="my_button_text">All Stops</string>
     <string name="my_button2">All Routes</string>

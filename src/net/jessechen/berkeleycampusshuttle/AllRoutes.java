@@ -5,14 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class AllRoutes extends Activity {
 	
 	@SuppressWarnings("unused")
 	private TextView labelHeader;
-	private Button pButton, rButton, cButton, hButton;
+	private ImageButton pButton, rButton, cButton, hButton;
 	private Bundle b;
 	private Intent intent;
 	
@@ -25,7 +25,7 @@ public class AllRoutes extends Activity {
         
         labelHeader = (TextView) findViewById(R.id.label_header);
         
-        pButton = (Button) findViewById(R.id.buttonP);
+        pButton = (ImageButton) findViewById(R.id.buttonP);
         pButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		intent = new Intent(AllRoutes.this, Route.class);        		
@@ -38,7 +38,7 @@ public class AllRoutes extends Activity {
         	}
         });
         
-        rButton = (Button) findViewById(R.id.buttonR);
+        rButton = (ImageButton) findViewById(R.id.buttonR);
         rButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		intent = new Intent(AllRoutes.this, Route.class);
@@ -51,7 +51,7 @@ public class AllRoutes extends Activity {
         	}
         });
         
-        cButton = (Button) findViewById(R.id.buttonC);
+        cButton = (ImageButton) findViewById(R.id.buttonC);
         cButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		intent = new Intent(AllRoutes.this, Route.class);
@@ -64,7 +64,7 @@ public class AllRoutes extends Activity {
         	}
         });
         
-        hButton = (Button) findViewById(R.id.buttonH);
+        hButton = (ImageButton) findViewById(R.id.buttonH);
         hButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		intent = new Intent(AllRoutes.this, Route.class);

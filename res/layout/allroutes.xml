@@ -24,32 +24,39 @@
         android:paddingTop="25px"
         android:layout_centerInParent="true">
 
-	   	<Button android:id="@+id/buttonP"
+	   	<ImageButton android:id="@+id/buttonP"
+	   		android:src="@drawable/p"
       		android:layout_width="wrap_content"
      	    android:layout_height="wrap_content"
-     	    android:padding="25dip"
-       		android:drawableTop="@drawable/p" android:gravity="center|fill_horizontal|center_vertical|center_horizontal|right" android:layout_centerInParent="false" android:layout_alignParentTop="true"/>
+     	    android:padding="25dp"
+       		android:drawableTop="@drawable/p" 
+       		android:gravity="center|fill_horizontal|center_vertical|center_horizontal|right" 
+       		android:layout_centerInParent="false" 
+       		android:layout_alignParentTop="true"/>
 
-    	<Button android:id="@+id/buttonR"
+    	<ImageButton android:id="@+id/buttonR"
+    		android:src="@drawable/r"
     	  	android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
      	    android:layout_toRightOf="@id/buttonP"
-     	    android:padding="25dip"
+     	    android:padding="25dp"
      	    android:drawableTop="@drawable/r" />
 
-       	<Button android:id="@+id/buttonC"
+       	<ImageButton android:id="@+id/buttonC"
+       		android:src="@drawable/c"
        		android:layout_width="wrap_content"
           	android:layout_height="wrap_content"
             android:layout_below="@id/buttonP"
-            android:padding="25dip"
+            android:padding="25dp"
             android:drawableTop="@drawable/c" />
 
-        <Button android:id="@+id/buttonH"
+        <ImageButton android:id="@+id/buttonH"
+			android:src="@drawable/h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/buttonC"
             android:layout_below="@id/buttonR"
-            android:padding="25dip"
+            android:padding="25dp"
             android:drawableTop="@drawable/h" />
     </RelativeLayout>
 </RelativeLayout>

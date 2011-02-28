@@ -21,13 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Stop extends Activity {
-    /** Called when the activity is first created. */
 	private static Bundle b;
 	private static CharSequence busStop, routeName;
 	private static Calendar calendar;
 	private static TextView title, countdown;
-	private static int[] result;
-	private static int hourRemaining, minuteRemaining, curHour, curMinute, dayOfWeek;
+	private static short[][] result;
+	private static short hourRemaining, minuteRemaining, curHour, curMinute, dayOfWeek;
 	private MyCount counter;
 	private static Button refreshButton;
 	
@@ -56,9 +55,9 @@ public class Stop extends Activity {
     
 	public void refresh() { // TODO: grab the next 3 predictions rather than just 1
         calendar = Calendar.getInstance();
-        curHour = calendar.get(Calendar.HOUR_OF_DAY);
-        curMinute = calendar.get(Calendar.MINUTE);
-        dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        curHour = (short) calendar.get(Calendar.HOUR_OF_DAY);
+        curMinute = (short) calendar.get(Calendar.MINUTE);
+        dayOfWeek = (short) calendar.get(Calendar.DAY_OF_WEEK);
             
         try {
 			result = getEventsFromAnXML(this, b.getInt("xml"), busStop); 
@@ -70,10 +69,10 @@ public class Stop extends Activity {
 		
 		countdown = (TextView) findViewById(R.id.countdown);
 		
-		if (result[0] != -1 && result[1] !=  -1) {
+		if (result[0][0] != -1) {
 			if (dayOfWeek != Calendar.SUNDAY && dayOfWeek != Calendar.SATURDAY) {
-				hourRemaining = result[0] - curHour;
-				minuteRemaining = result[1] - curMinute;
+				hourRemaining = (short) (result[0][1] - curHour);
+				minuteRemaining = (short) (result[0][1] - curMinute);
 
 				counter = new MyCount(hourRemaining * 3600000 + minuteRemaining * 60000, 1000);
 				counter.start();      
@@ -102,9 +101,9 @@ public class Stop extends Activity {
 		}
     }
     
-    private int[] getEventsFromAnXML(Activity activity, int xml, CharSequence stop) throws XmlPullParserException, IOException {
+    private short[][] getEventsFromAnXML(Activity activity, int xml, CharSequence stop) throws XmlPullParserException, IOException {
 		InputStream istream = null;
-		int[] result = null;
+		short[][] result = null;
 		try {
 			istream = activity.getResources().openRawResource(xml);
 
@@ -141,11 +140,11 @@ public class Stop extends Activity {
     	return routeName;
     }
     
-    public static int getCurHour() {
+    public static short getCurHour() {
     	return curHour;
     }
     
-    public static int getCurMinute() {
+    public static short getCurMinute() {
     	return curMinute;
     }
 }
