@@ -1,0 +1,29 @@
+Bear Transit, otherwise known as the UC Berkeley campus shuttle, is 
+a convenient transit system that takes you around campus and it's 
+nearby vicinities.  Berkeley Campus Shuttle is an Android app that
+will allow your Android based phone to use the bus schedule's to 
+estimate the arrival of the next bus.  
+
+Other transit agencies like AC Transit and BART has nextbus.com,
+which actually uses GPS to estimate the next bus/train.  However,
+Bear Transit only has a web page that lists the time arrivals 
+for each route.  This app takes that data and puts it in a 
+simple and friendly format for you while on-the-go.  
+
+Features:
+   * Select by which route (i.e. Perimeter, Reverse) and stop
+     (i.e. Cory Hall: Hearst Ave and LeRoy Ave) to predict. 
+   * Select which stop you want to predict.  It will return 
+     predictions for all routes that serve that stop.
+   * Save favorite routes and favorite stops so you can quickly
+     jump to their predictions without navigating through everything.
+     
+Features to possibly come:
+   * Use GPS to find closest stop and return predictions.  
+   * Create a widget that counts down on the time remaining at a 
+     given stop.  
+     
+User comments and critiques are welcome!
+     
+Visit my website:
+http://www.jessechen.net
