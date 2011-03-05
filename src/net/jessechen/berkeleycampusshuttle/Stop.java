@@ -24,70 +24,90 @@ public class Stop extends Activity {
 	private static Bundle b;
 	private static CharSequence busStop, routeName;
 	private static Calendar calendar;
-	private static TextView title, countdown;
-	private static short[][] result;
-	private static short hourRemaining, minuteRemaining, curHour, curMinute, dayOfWeek;
+	private static TextView title, countdown1, countdown2, countdown3;
+	private static int[][] result;
+	private static short hourRemaining, minuteRemaining, curHour, curMinute,
+			dayOfWeek;
 	private MyCount counter;
 	private static Button refreshButton;
-	
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-   
-        setContentView(R.layout.stop);
-        
-        b = getIntent().getExtras();
-        busStop = b.getCharSequence("stop");
-        routeName = b.getCharSequence("route");
-		
-        title = (TextView) findViewById(R.id.stop_title);
-        title.setText(routeName + ": Predictions for " + busStop);
-        
-        refresh();
-        
-		refreshButton = (Button) findViewById(R.id.refresh);
-        refreshButton.setOnClickListener(new OnClickListener() {
-        	public void onClick(View v) {
-        		refresh();
-        	}
-        });
-    }
-    
-	public void refresh() { // TODO: grab the next 3 predictions rather than just 1
-        calendar = Calendar.getInstance();
-        curHour = (short) calendar.get(Calendar.HOUR_OF_DAY);
-        curMinute = (short) calendar.get(Calendar.MINUTE);
-        dayOfWeek = (short) calendar.get(Calendar.DAY_OF_WEEK);
-            
-        try {
-			result = getEventsFromAnXML(this, b.getInt("xml"), busStop); 
-		} catch (XmlPullParserException e) {
-			Toast.makeText(getApplicationContext(), "A fatal error occured.  Report it!", Toast.LENGTH_SHORT).show();
-		} catch (IOException e) {
-			Toast.makeText(getApplicationContext(), "A fatal error occured.  Report it!", Toast.LENGTH_SHORT).show();
-		}
-		
-		countdown = (TextView) findViewById(R.id.countdown);
-		
-		if (result[0][0] != -1) {
-			if (dayOfWeek != Calendar.SUNDAY && dayOfWeek != Calendar.SATURDAY) {
-				hourRemaining = (short) (result[0][1] - curHour);
-				minuteRemaining = (short) (result[0][1] - curMinute);
 
-				counter = new MyCount(hourRemaining * 3600000 + minuteRemaining * 60000, 1000);
-				counter.start();      
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.stop);
+
+		b = getIntent().getExtras();
+		busStop = b.getCharSequence("stop");
+		routeName = b.getCharSequence("route");
+
+		title = (TextView) findViewById(R.id.stop_title);
+		title.setText(routeName + ": Predictions for " + busStop);
+
+		refresh();
+
+		refreshButton = (Button) findViewById(R.id.refresh);
+		refreshButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				refresh();
+			}
+		});
+	}
+
+	public void refresh() {
+		calendar = Calendar.getInstance();
+		curHour = (short) calendar.get(Calendar.HOUR_OF_DAY);
+		curMinute = (short) calendar.get(Calendar.MINUTE);
+		dayOfWeek = (short) calendar.get(Calendar.DAY_OF_WEEK);
+		countdown1 = (TextView) findViewById(R.id.countdown1);
+		countdown2 = (TextView) findViewById(R.id.countdown2);
+		countdown3 = (TextView) findViewById(R.id.countdown3);
+
+		if (dayOfWeek != Calendar.SUNDAY && dayOfWeek != Calendar.SATURDAY) {
+			try {
+				result = getEventsFromAnXML(this, b.getInt("xml"), busStop);
+			} catch (XmlPullParserException e) {
+				Toast.makeText(getApplicationContext(),
+						"A fatal error occured.  Report it!",
+						Toast.LENGTH_SHORT).show();
+			} catch (IOException e) {
+				Toast.makeText(getApplicationContext(),
+						"A fatal error occured.  Report it!",
+						Toast.LENGTH_SHORT).show();
+			}
+
+			if (result[0][0] != -1) { // first hour result is -1, no more
+								      // predictions for the day
+				setCounter(countdown1, 1);
+				setCounter(countdown2, 2);
+				setCounter(countdown3, 3);
 			} else {
-				countdown.setText("Campus shuttle does not run during the weekends");
-			} 
+				countdown1.setText("No more predictions for the day");
+			}
 		} else {
-			countdown.setText("No more predictions for the day");
+			countdown1
+					.setText("Campus shuttle does not run during the weekends");
 		}
-    }
-    
-    public class MyCount extends CountDownTimer {
-    	public MyCount(long millisInFuture, long countDownInterval) {
-    		super(millisInFuture, countDownInterval);
-    	}
+	}
+
+	private void setCounter(TextView tv, int i) {
+		if (result[i][0] != -1) {
+			hourRemaining = (short) (result[i][0] - curHour);
+			minuteRemaining = (short) (result[i][1] - curMinute);
+
+			counter = new MyCount(tv, hourRemaining * 3600000
+					+ minuteRemaining * 60000, 1000);
+			counter.start();
+		}
+	}
+
+	public class MyCount extends CountDownTimer {
+		TextView tv;
+
+		public MyCount(TextView t, long millisInFuture, long countDownInterval) {
+			super(millisInFuture, countDownInterval);
+			tv = t;
+		}
 
 		@Override
 		public void onFinish() {
@@ -96,14 +116,15 @@ public class Stop extends Activity {
 
 		@Override
 		public void onTick(long millisUntilFinished) {
-            countdown.setText(millisUntilFinished / 60000 
-            		+ " minutes remaining (at " + result[0] + ":" + result[1] + ")");
+			tv.setText(millisUntilFinished / 60000 + " minutes remaining (at "
+					+ result[0] + ":" + result[1] + ")");
 		}
-    }
-    
-    private short[][] getEventsFromAnXML(Activity activity, int xml, CharSequence stop) throws XmlPullParserException, IOException {
+	}
+
+	private int[][] getEventsFromAnXML(Activity activity, int xml,
+			CharSequence stop) throws XmlPullParserException, IOException {
 		InputStream istream = null;
-		short[][] result = null;
+		int[][] result = null;
 		try {
 			istream = activity.getResources().openRawResource(xml);
 
@@ -123,28 +144,26 @@ public class Stop extends Activity {
 			FileNotFoundException.printStackTrace();
 		}
 		return result;
-    }
+	}
 
-    public void onDestroy() {
-    	super.onDestroy();
-    	if (counter != null) {
-    		counter.cancel();
-    	}
-    }
+	public void onDestroy() {
+		super.onDestroy();
+		if (counter != null) { counter.cancel();}
+	}
 
 	public static CharSequence getBusStop() {
-    	return busStop;
-    }
-    
-    public static CharSequence getRouteName() {
-    	return routeName;
-    }
-    
-    public static short getCurHour() {
-    	return curHour;
-    }
-    
-    public static short getCurMinute() {
-    	return curMinute;
-    }
+		return busStop;
+	}
+
+	public static CharSequence getRouteName() {
+		return routeName;
+	}
+
+	public static short getCurHour() {
+		return curHour;
+	}
+
+	public static short getCurMinute() {
+		return curMinute;
+	}
 }

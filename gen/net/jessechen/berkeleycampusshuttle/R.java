@@ -33,7 +33,9 @@ public final class R {
         public static final int buttonP=0x7f070004;
         public static final int buttonR=0x7f070005;
         public static final int cal_logo=0x7f070008;
-        public static final int countdown=0x7f07000e;
+        public static final int countdown1=0x7f07000e;
+        public static final int countdown2=0x7f07000f;
+        public static final int countdown3=0x7f070010;
         public static final int label_header=0x7f070002;
         public static final int lay_action=0x7f070001;
         public static final int lay_main=0x7f070003;
@@ -41,7 +43,7 @@ public final class R {
         public static final int list=0x7f07000c;
         public static final int my_button=0x7f070009;
         public static final int my_button2=0x7f07000a;
-        public static final int refresh=0x7f07000f;
+        public static final int refresh=0x7f070011;
         public static final int route_title=0x7f07000b;
         public static final int stop_title=0x7f07000d;
     }

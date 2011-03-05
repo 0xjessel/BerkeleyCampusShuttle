@@ -9,14 +9,14 @@ public class ManHandler extends DefaultHandler {
 	private boolean correct_hour = false;
 	private boolean done = false;
 	private boolean same_hour = false;
-	private short hour, numResults = 0;
+	private int hour, numResults = 0;
 	private StringBuilder buf = null;
-	private static final short TOTAL_MINS = 3;
-	private static short result[][];
+	public static final int TOTAL_MINS = 3;
+	private static int result[][];
 	
 	@Override
 	public void startDocument() throws SAXException {
-		result = new short[3][2]; // return 3 predictions, each with hour and minute
+		result = new int[3][2]; // return 3 predictions, each with hour and minute
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class ManHandler extends DefaultHandler {
 		buf = null;
 	}
 	
-	public static short[][] getResult() {
+	public static int[][] getResult() {
 		return result;
 	}
 }
