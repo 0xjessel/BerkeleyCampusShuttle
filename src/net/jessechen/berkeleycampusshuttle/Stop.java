@@ -28,7 +28,7 @@ public class Stop extends Activity {
 	private static int[][] result;
 	private static short hourRemaining, minuteRemaining, curHour, curMinute,
 			dayOfWeek;
-	private MyCount counter;
+	private MyCount counter1, counter2, counter3;
 	private static Button refreshButton;
 
 	@Override
@@ -55,6 +55,10 @@ public class Stop extends Activity {
 	}
 
 	public void refresh() {
+		if (counter1 != null) { counter1.cancel();}
+		if (counter2 != null) { counter2.cancel();}
+		if (counter3 != null) { counter3.cancel();}
+		
 		calendar = Calendar.getInstance();
 		curHour = (short) calendar.get(Calendar.HOUR_OF_DAY);
 		curMinute = (short) calendar.get(Calendar.MINUTE);
@@ -78,9 +82,9 @@ public class Stop extends Activity {
 
 			if (result[0][0] != -1) { // first hour result is -1, no more
 								      // predictions for the day
-				setCounter(countdown1, 1);
-				setCounter(countdown2, 2);
-				setCounter(countdown3, 3);
+				setCounter(countdown1, counter1, 0);
+				setCounter(countdown2, counter2, 1);
+				setCounter(countdown3, counter3, 2);
 			} else {
 				countdown1.setText("No more predictions for the day");
 			}
@@ -90,23 +94,37 @@ public class Stop extends Activity {
 		}
 	}
 
-	private void setCounter(TextView tv, int i) {
+	private void setCounter(TextView tv, MyCount counter, int i) {
 		if (result[i][0] != -1) {
 			hourRemaining = (short) (result[i][0] - curHour);
 			minuteRemaining = (short) (result[i][1] - curMinute);
 
-			counter = new MyCount(tv, hourRemaining * 3600000
+			counter = new MyCount(tv, i, hourRemaining * 3600000
 					+ minuteRemaining * 60000, 1000);
 			counter.start();
 		}
 	}
 
 	public class MyCount extends CountDownTimer {
-		TextView tv;
+		private TextView tv;
+		private int index;
+		private String subString, minute, hour;
 
-		public MyCount(TextView t, long millisInFuture, long countDownInterval) {
+		public MyCount(TextView t, int i, long millisInFuture,
+				long countDownInterval) {
 			super(millisInFuture, countDownInterval);
 			tv = t;
+			index = i;
+			minute = Integer.toString(result[index][1]);
+			if (minute == "0") {
+				minute = "00";
+			}
+			hour = Integer.toString(result[index][0] % 12);
+			if (hour == "0") {
+				hour = "12";
+			}
+			subString = " minutes remaining (at " + result[index][0] + ":"
+					+ minute + ")";
 		}
 
 		@Override
@@ -116,8 +134,7 @@ public class Stop extends Activity {
 
 		@Override
 		public void onTick(long millisUntilFinished) {
-			tv.setText(millisUntilFinished / 60000 + " minutes remaining (at "
-					+ result[0] + ":" + result[1] + ")");
+			tv.setText(millisUntilFinished / 60000 + subString);
 		}
 	}
 
@@ -148,7 +165,9 @@ public class Stop extends Activity {
 
 	public void onDestroy() {
 		super.onDestroy();
-		if (counter != null) { counter.cancel();}
+		if (counter1 != null) { counter1.cancel();}
+		if (counter2 != null) { counter2.cancel();}
+		if (counter3 != null) { counter3.cancel();}
 	}
 
 	public static CharSequence getBusStop() {
