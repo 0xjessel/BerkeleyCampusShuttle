@@ -12,11 +12,10 @@ public class ManHandler extends DefaultHandler {
 	private int hour, numResults = 0;
 	private StringBuilder buf = null;
 	public static final int TOTAL_MINS = 3;
-	private static int result[][];
+	private static int result[][] = {{-1, -1}, {-1, -1}, {-1, -1}}; // return 3 predictions, each with hour and minute
 	
 	@Override
 	public void startDocument() throws SAXException {
-		result = new int[3][2]; // return 3 predictions, each with hour and minute
 	}
 
 	@Override
@@ -38,9 +37,7 @@ public class ManHandler extends DefaultHandler {
 				} else if (hour > curHour) {
 					correct_hour = true;
 					same_hour = false;
-				} else {
-					hour = -1; // return -1 if no valid hour to return
-				}
+				} // do nothing for hour < curHour
 			}
 		}
 	}
@@ -59,8 +56,8 @@ public class ManHandler extends DefaultHandler {
 			throws SAXException {
 		if (localName.equals("minute")) {
 			if (correct_hour) {
-				short curMinute = Stop.getCurMinute();
-				short minute = Short.parseShort(buf.toString());
+				int curMinute = Stop.getCurMinute();
+				int minute = Short.parseShort(buf.toString());
 				if (!same_hour && numResults != TOTAL_MINS) {
 					result[numResults][0] = hour;
 					result[numResults][1] = minute; // get the first minute value if not in the same hour
@@ -81,7 +78,8 @@ public class ManHandler extends DefaultHandler {
 			}
 		
 		} else if (localName.equals("name")) {
-			if (buf.toString().equals(Stop.getBusStop())) {
+			CharSequence s = Stop.getBusStop();
+			if (buf.toString().equals(s)) {
 				correct_stop = true;
 			}
 		} else if (localName.equals("stop") && correct_stop) {

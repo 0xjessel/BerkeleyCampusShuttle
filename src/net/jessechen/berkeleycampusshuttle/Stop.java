@@ -26,8 +26,7 @@ public class Stop extends Activity {
 	private static Calendar calendar;
 	private static TextView title, countdown1, countdown2, countdown3;
 	private static int[][] result;
-	private static short hourRemaining, minuteRemaining, curHour, curMinute,
-			dayOfWeek;
+	private static int hourRemaining, minuteRemaining, curHour, curMinute, dayOfWeek;
 	private MyCount counter1, counter2, counter3;
 	private static Button refreshButton;
 
@@ -55,14 +54,19 @@ public class Stop extends Activity {
 	}
 
 	public void refresh() {
-		if (counter1 != null) { counter1.cancel();}
+		/*if (counter1 != null) { counter1.cancel();}
 		if (counter2 != null) { counter2.cancel();}
-		if (counter3 != null) { counter3.cancel();}
+		if (counter3 != null) { counter3.cancel();}*/
+		if (countdown1 != null && countdown2 != null && countdown3 != null) {
+			countdown1.invalidate();
+			countdown2.invalidate();
+			countdown3.invalidate();
+		}
 		
 		calendar = Calendar.getInstance();
-		curHour = (short) calendar.get(Calendar.HOUR_OF_DAY);
-		curMinute = (short) calendar.get(Calendar.MINUTE);
-		dayOfWeek = (short) calendar.get(Calendar.DAY_OF_WEEK);
+		curHour = calendar.get(Calendar.HOUR_OF_DAY);
+		curMinute = calendar.get(Calendar.MINUTE);
+		dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 		countdown1 = (TextView) findViewById(R.id.countdown1);
 		countdown2 = (TextView) findViewById(R.id.countdown2);
 		countdown3 = (TextView) findViewById(R.id.countdown3);
@@ -80,8 +84,7 @@ public class Stop extends Activity {
 						Toast.LENGTH_SHORT).show();
 			}
 
-			if (result[0][0] != -1) { // first hour result is -1, no more
-								      // predictions for the day
+			if (result[0][0] != -1) { // first hour result is -1, no more predictions for the day
 				setCounter(countdown1, counter1, 0);
 				setCounter(countdown2, counter2, 1);
 				setCounter(countdown3, counter3, 2);
@@ -89,8 +92,7 @@ public class Stop extends Activity {
 				countdown1.setText("No more predictions for the day");
 			}
 		} else {
-			countdown1
-					.setText("Campus shuttle does not run during the weekends");
+			countdown1.setText("Campus shuttle does not run during the weekends");
 		}
 	}
 
@@ -99,42 +101,52 @@ public class Stop extends Activity {
 			hourRemaining = (short) (result[i][0] - curHour);
 			minuteRemaining = (short) (result[i][1] - curMinute);
 
-			counter = new MyCount(tv, i, hourRemaining * 3600000
-					+ minuteRemaining * 60000, 1000);
+			counter = new MyCount(tv, i, hourRemaining * 3600000 + minuteRemaining * 60000, 1000);
 			counter.start();
 		}
 	}
 
 	public class MyCount extends CountDownTimer {
 		private TextView tv;
-		private int index;
-		private String subString, minute, hour;
+		private String subString, minute, hour, ampm;
 
-		public MyCount(TextView t, int i, long millisInFuture,
+		public MyCount(TextView t, int index, long millisInFuture,
 				long countDownInterval) {
 			super(millisInFuture, countDownInterval);
 			tv = t;
-			index = i;
-			minute = Integer.toString(result[index][1]);
-			if (minute == "0") {
-				minute = "00";
+			minute = Integer.toString(result[index][1]); 
+			if (minute.length() == 1) { // append extra 0 for formatting
+				if (minute == "0") {
+					minute = "00";
+				} else {
+					minute = "0" + minute;
+				}
 			}
-			hour = Integer.toString(result[index][0] % 12);
+			hour = Integer.toString(result[index][0] % 12); // add am and pm
 			if (hour == "0") {
 				hour = "12";
 			}
-			subString = " minutes remaining (at " + result[index][0] + ":"
-					+ minute + ")";
+			if (result[index][0] > 12) {
+				ampm = "pm";
+			} else {
+				ampm = "am";
+			}
+			subString = " (at " + hour + ":" + minute + ampm + ")";
 		}
 
 		@Override
-		public void onFinish() {
-			Stop.this.refresh();
+		public void onFinish() { // TODO: fix this
+			refresh();
 		}
-
+		
 		@Override
 		public void onTick(long millisUntilFinished) {
-			tv.setText(millisUntilFinished / 60000 + subString);
+			int timeRemaining = (int) millisUntilFinished / 60000;
+			if (timeRemaining == 0) {
+				tv.setText("Arriving" + subString);
+			} else {
+				tv.setText(timeRemaining + " minutes remaining" + subString);
+			}
 		}
 	}
 
@@ -163,8 +175,9 @@ public class Stop extends Activity {
 		return result;
 	}
 
-	public void onDestroy() {
-		super.onDestroy();
+	@Override
+	public void onStop() {
+		super.onStop();
 		if (counter1 != null) { counter1.cancel();}
 		if (counter2 != null) { counter2.cancel();}
 		if (counter3 != null) { counter3.cancel();}
@@ -178,11 +191,11 @@ public class Stop extends Activity {
 		return routeName;
 	}
 
-	public static short getCurHour() {
+	public static int getCurHour() {
 		return curHour;
 	}
 
-	public static short getCurMinute() {
+	public static int getCurMinute() {
 		return curMinute;
 	}
 }
