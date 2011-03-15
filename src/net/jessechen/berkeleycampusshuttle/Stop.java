@@ -64,7 +64,7 @@ public class Stop extends Activity {
 		}
 		
 		calendar = Calendar.getInstance();
-		curHour = calendar.get(Calendar.HOUR_OF_DAY);
+		curHour = 17; //calendar.get(Calendar.HOUR_OF_DAY);
 		curMinute = calendar.get(Calendar.MINUTE);
 		dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 		countdown1 = (TextView) findViewById(R.id.countdown1);

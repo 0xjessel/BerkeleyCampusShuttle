@@ -3,6 +3,9 @@ package net.jessechen.berkeleycampusshuttle;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -12,7 +15,7 @@ import android.widget.TextView;
 
 public class Route extends Activity {
 	
-    private CharSequence routeName;
+    private String routeName, stop;
     private String [] busStops;
     private Bundle b, c;
     private TextView title;
@@ -28,7 +31,7 @@ public class Route extends Activity {
         setContentView(R.layout.route);
         
         b = getIntent().getExtras();
-        routeName = b.getCharSequence("route_name");
+        routeName = (String) b.getCharSequence("route_name");
         
         title = (TextView) findViewById(R.id.route_title);
         title.setText("Stops for " + routeName);
@@ -39,22 +42,42 @@ public class Route extends Activity {
         lv = (ListView) findViewById(R.id.list);
         lvAdapter = new ArrayAdapter<String>(this, R.layout.list_item, busStops);
         lv.setAdapter(lvAdapter);
-        
+        registerForContextMenu(lv);
         lv.setTextFilterEnabled(true);
-        
-        lv.setOnItemClickListener(new OnItemClickListener() {
-          public void onItemClick(AdapterView<?> parent, View view,
-              int position, long id) {
-      		intent = new Intent(Route.this, Stop.class);
-      		
-      		c = new Bundle();
-      		c.putCharSequence("stop", ((TextView) view).getText());
-      		c.putCharSequence("route", routeName);
-      		c.putInt("xml", b.getInt("xml"));
-      		intent.putExtras(c);
-      		
-    		startActivity(intent);
-          }
-        }); 
+
+		lv.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				intent = new Intent(Route.this, Stop.class);
+
+				c = new Bundle();
+				c.putCharSequence("stop", ((TextView) view).getText());
+				c.putCharSequence("route", routeName);
+				c.putInt("xml", b.getInt("xml"));
+				intent.putExtras(c);
+
+				startActivity(intent);
+			}
+		});
+	}
+    
+    @Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		menu.add("Add to Favorites");
+	}
+    
+    @Override
+    public boolean onMenuItemSelected(int featureID, MenuItem item) {
+    	AdapterView.AdapterContextMenuInfo info;
+    	try {
+    		info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+    	} catch (ClassCastException e) {
+    		return false;
+    	}
+    	stop = (String) lv.getItemAtPosition(info.position);
+    	FavoriteStops.writeToFile(getApplicationContext(), stop);
+    	return true;
     }
 }

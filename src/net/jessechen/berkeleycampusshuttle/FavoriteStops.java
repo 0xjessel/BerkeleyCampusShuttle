@@ -12,17 +12,18 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 public class FavoriteStops extends Activity {
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	
     }
-
-	public void writeToFile(Context context, String data) {
+    
+	public static void writeToFile(Context context, String data) {
 		FileOutputStream fOut = null;
 		OutputStreamWriter osw = null;
 
 		try {
-			fOut = openFileOutput("favorites.dat", MODE_PRIVATE);
+			fOut = context.openFileOutput("favorites.dat", MODE_PRIVATE);
 			osw = new OutputStreamWriter(fOut);
 			osw.write(data);
 			osw.flush();
