@@ -62,7 +62,7 @@ public class ManHandler extends DefaultHandler {
 					result[numResults][0] = hour;
 					result[numResults][1] = minute; // get the first minute value if not in the same hour
 					numResults++;
-				} else if ((minute == curMinute || minute > curMinute) && numResults != TOTAL_MINS) {
+				} else if ((minute > curMinute) && numResults != TOTAL_MINS) { //minute == curMinute || 
 					result[numResults][0] = hour;
 					result[numResults][1] = minute;
 					numResults++;

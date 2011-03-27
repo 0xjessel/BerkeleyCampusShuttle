@@ -42,7 +42,11 @@ public class Stop extends Activity {
 
 		title = (TextView) findViewById(R.id.stop_title);
 		title.setText(routeName + ": Predictions for " + busStop);
-
+;
+		countdown1 = (TextView) findViewById(R.id.countdown1);
+		countdown2 = (TextView) findViewById(R.id.countdown2);
+		countdown3 = (TextView) findViewById(R.id.countdown3);
+		
 		refresh();
 
 		refreshButton = (Button) findViewById(R.id.refresh);
@@ -54,22 +58,14 @@ public class Stop extends Activity {
 	}
 
 	public void refresh() {
-		/*if (counter1 != null) { counter1.cancel();}
-		if (counter2 != null) { counter2.cancel();}
-		if (counter3 != null) { counter3.cancel();}*/
-		if (countdown1 != null && countdown2 != null && countdown3 != null) {
-			countdown1.invalidate();
-			countdown2.invalidate();
-			countdown3.invalidate();
-		}
+		countdown1.invalidate();
+		countdown2.invalidate();
+		countdown3.invalidate();
 		
 		calendar = Calendar.getInstance();
-		curHour = 17; //calendar.get(Calendar.HOUR_OF_DAY);
+		curHour = calendar.get(Calendar.HOUR_OF_DAY);
 		curMinute = calendar.get(Calendar.MINUTE);
 		dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-		countdown1 = (TextView) findViewById(R.id.countdown1);
-		countdown2 = (TextView) findViewById(R.id.countdown2);
-		countdown3 = (TextView) findViewById(R.id.countdown3);
 
 		if (dayOfWeek != Calendar.SUNDAY && dayOfWeek != Calendar.SATURDAY) {
 			try {
@@ -85,9 +81,30 @@ public class Stop extends Activity {
 			}
 
 			if (result[0][0] != -1) { // first hour result is -1, no more predictions for the day
-				setCounter(countdown1, counter1, 0);
-				setCounter(countdown2, counter2, 1);
-				setCounter(countdown3, counter3, 2);
+				if (result[0][0] != -1) {
+					hourRemaining = (result[0][0] - curHour);
+					minuteRemaining = (result[0][1] - curMinute);
+					counter1 = new MyCount(countdown1, 0, hourRemaining * 3600000 + minuteRemaining * 60000, 1000);
+					counter1.start();
+				} else {
+					countdown1.setText("");
+				}
+				if (result[1][0] != -1) {
+					hourRemaining = (result[1][0] - curHour);
+					minuteRemaining = (result[1][1] - curMinute);
+					counter2 = new MyCount(countdown2, 1, hourRemaining * 3600000 + minuteRemaining * 60000, 1000);
+					counter2.start();
+				} else {
+					countdown2.setText("");
+				}
+				if (result[2][0] != -1) {
+					hourRemaining = (result[2][0] - curHour);
+					minuteRemaining = (result[2][1] - curMinute);
+					counter3 = new MyCount(countdown3, 2, hourRemaining * 3600000 + minuteRemaining * 60000, 1000);
+					counter3.start();
+				} else {
+					countdown3.setText("");
+				}
 			} else {
 				countdown1.setText("No more predictions for the day");
 			}
@@ -96,24 +113,14 @@ public class Stop extends Activity {
 		}
 	}
 
-	private void setCounter(TextView tv, MyCount counter, int i) {
-		if (result[i][0] != -1) {
-			hourRemaining = (short) (result[i][0] - curHour);
-			minuteRemaining = (short) (result[i][1] - curMinute);
-
-			counter = new MyCount(tv, i, hourRemaining * 3600000 + minuteRemaining * 60000, 1000);
-			counter.start();
-		}
-	}
-
 	public class MyCount extends CountDownTimer {
 		private TextView tv;
 		private String subString, minute, hour, ampm;
 
-		public MyCount(TextView t, int index, long millisInFuture,
+		public MyCount(TextView cd, int index, long millisInFuture,
 				long countDownInterval) {
 			super(millisInFuture, countDownInterval);
-			tv = t;
+			tv = cd;
 			minute = Integer.toString(result[index][1]); 
 			if (minute.length() == 1) { // append extra 0 for formatting
 				if (minute == "0") {
@@ -135,7 +142,13 @@ public class Stop extends Activity {
 		}
 
 		@Override
-		public void onFinish() { // TODO: fix this
+		public void onFinish() {
+			countdown1.setText("");
+			if (counter1 != null) { counter1.cancel();}
+			countdown2.setText("");
+			if (counter2 != null) { counter2.cancel();}
+			countdown3.setText("");
+			if (counter3 != null) { counter3.cancel();}
 			refresh();
 		}
 		
