@@ -58,7 +58,7 @@ public class Stop extends Activity {
 	}
 
 	public void refresh() {
-		countdown1.invalidate();
+		countdown1.invalidate(); // do i need this
 		countdown2.invalidate();
 		countdown3.invalidate();
 		
