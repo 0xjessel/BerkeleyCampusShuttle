@@ -42,7 +42,7 @@ public class Stop extends Activity {
 
 		title = (TextView) findViewById(R.id.stop_title);
 		title.setText(routeName + ": Predictions for " + busStop);
-;
+
 		countdown1 = (TextView) findViewById(R.id.countdown1);
 		countdown2 = (TextView) findViewById(R.id.countdown2);
 		countdown3 = (TextView) findViewById(R.id.countdown3);
