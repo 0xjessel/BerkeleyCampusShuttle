@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/lay_wrapper"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
@@ -10,25 +11,26 @@
         <TextView 
         	android:text="@string/allroutes" 
         	android:layout_width="wrap_content" 
-        	android:layout_height="100px" 
+        	android:layout_height="80dp" 
         	android:id="@+id/label_header"
-        	android:paddingTop="15px"
+        	android:paddingTop="15dp"
 			android:textColor="#FFFFFF" 
-			android:textSize="25sp">
+			android:textSize="25dp">
 		</TextView>
 	</LinearLayout>
     <RelativeLayout android:id="@+id/lay_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
         android:layout_below="@id/lay_action"
-        android:paddingTop="25px"
+        android:paddingTop="25dp"
         android:layout_centerInParent="true">
 
 	   	<ImageButton android:id="@+id/buttonP"
 	   		android:src="@drawable/p"
-      		android:layout_width="wrap_content"
-     	    android:layout_height="wrap_content"
-     	    android:padding="25dp"
+    		android:scaleType="fitXY"
+    		android:padding="25dp"
+      		android:layout_width="100dp"
+     	    android:layout_height="100dp"
        		android:drawableTop="@drawable/p" 
        		android:gravity="center|fill_horizontal|center_vertical|center_horizontal|right" 
        		android:layout_centerInParent="false" 
@@ -36,27 +38,30 @@
 
     	<ImageButton android:id="@+id/buttonR"
     		android:src="@drawable/r"
-    	  	android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
+    		android:scaleType="fitXY"
+    		android:padding="25dp"
+    	  	android:layout_width="100dp"
+    	    android:layout_height="100dp"
      	    android:layout_toRightOf="@id/buttonP"
-     	    android:padding="25dp"
      	    android:drawableTop="@drawable/r" />
 
        	<ImageButton android:id="@+id/buttonC"
        		android:src="@drawable/c"
-       		android:layout_width="wrap_content"
-          	android:layout_height="wrap_content"
+    		android:scaleType="fitXY"
+    		android:padding="25dp"
+       		android:layout_width="100dp"
+          	android:layout_height="100dp"
             android:layout_below="@id/buttonP"
-            android:padding="25dp"
             android:drawableTop="@drawable/c" />
 
         <ImageButton android:id="@+id/buttonH"
 			android:src="@drawable/h"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    		android:scaleType="fitXY"
+    		android:padding="25dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_toRightOf="@id/buttonC"
             android:layout_below="@id/buttonR"
-            android:padding="25dp"
             android:drawableTop="@drawable/h" />
     </RelativeLayout>
 </RelativeLayout>
