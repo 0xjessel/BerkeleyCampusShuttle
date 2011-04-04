@@ -22,16 +22,13 @@ public class FileHandler extends Activity {
 
 	public static void writeToFile(Context context, String data) {
 		FileOutputStream fOut = null;
-		OutputStreamWriter osw = null;
 		BufferedWriter fbw = null;
 
 		try {
 			fOut = context.openFileOutput("favorites.dat", MODE_APPEND);
-			osw = new OutputStreamWriter(fOut);
-			fbw = new BufferedWriter(osw);
+			fbw = new BufferedWriter(new OutputStreamWriter(fOut));
 
-			fbw.write(data);
-			
+			fbw.write(data + "\r");
 			fbw.flush();
 			Toast.makeText(context, data + " added to your favorites",
 					Toast.LENGTH_SHORT).show();
@@ -46,7 +43,6 @@ public class FileHandler extends Activity {
 		} finally {
 			try {
 				fbw.close();
-				osw.close();
 				fOut.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -76,7 +72,7 @@ public class FileHandler extends Activity {
 			try {
 				isr.close();
 				fIn.close();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

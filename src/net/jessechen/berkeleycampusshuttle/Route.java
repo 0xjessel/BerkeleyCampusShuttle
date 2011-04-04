@@ -78,7 +78,7 @@ public class Route extends Activity {
     		return false;
     	}
     	stop = (String) lv.getItemAtPosition(info.position);
-    	FileHandler.writeToFile(getApplicationContext(), stop);
+    	FileHandler.writeToFile(getApplicationContext(), routeName + "," + stop);
     	return true;
     }
 }
