@@ -26,7 +26,7 @@
  			android:layout_height="75dp" 
  			android:layout_gravity="center"
  			android:textSize="20dp"
- 			android:id="@+id/my_button"/>
+ 			android:id="@+id/b_allroutes"/>
  	
  		 <Button 
 			android:text="@string/allroutes" 
@@ -34,6 +34,14 @@
 			android:layout_height="75dp"
  			android:layout_gravity="center"
  			android:textSize="20dp"
-			android:id="@+id/my_button2"/>
+			android:id="@+id/b_allstops"/>
+			
+	 	<Button 
+			android:text="@string/myfavorites" 
+			android:layout_width="200dp" 
+			android:layout_height="75dp"
+ 			android:layout_gravity="center"
+ 			android:textSize="20dp"
+			android:id="@+id/b_favorites"/>		
 	</LinearLayout>
 </ScrollView>

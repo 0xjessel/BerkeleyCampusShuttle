@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class AllRoutes extends Activity {
 	
 	@SuppressWarnings("unused")
-	private TextView labelHeader;
+	private TextView title;
 	private ImageButton pButton, rButton, cButton, hButton;
 	private Bundle b;
 	private Intent intent;
@@ -23,7 +23,7 @@ public class AllRoutes extends Activity {
 
         setContentView(R.layout.allroutes);
         
-        labelHeader = (TextView) findViewById(R.id.label_header);
+        title = (TextView) findViewById(R.id.t_allroutes);
         
         pButton = (ImageButton) findViewById(R.id.buttonP);
         pButton.setOnClickListener(new OnClickListener() {

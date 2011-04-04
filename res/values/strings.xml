@@ -3,6 +3,7 @@
     <string name="app_name">Berkeley Campus Shuttle</string>
     <string name="allstops">All Stops</string>
     <string name="allroutes">All Routes</string>
+    <string name="myfavorites">My Favorites</string>
     <string-array name="all_stops">
     	<item>Downtown Berkeley BART Station: Shattuck Ave and Addison St</item>
     	<item>Tolman Hall: Hearst Ave and Arch St</item>

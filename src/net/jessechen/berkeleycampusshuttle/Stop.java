@@ -40,7 +40,7 @@ public class Stop extends Activity {
 		busStop = b.getCharSequence("stop");
 		routeName = b.getCharSequence("route");
 
-		title = (TextView) findViewById(R.id.stop_title);
+		title = (TextView) findViewById(R.id.t_stop);
 		title.setText(routeName + ": Predictions for " + busStop);
 
 		countdown1 = (TextView) findViewById(R.id.countdown1);
@@ -49,7 +49,7 @@ public class Stop extends Activity {
 		
 		refresh();
 
-		refreshButton = (Button) findViewById(R.id.refresh);
+		refreshButton = (Button) findViewById(R.id.b_refresh);
 		refreshButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				refresh();

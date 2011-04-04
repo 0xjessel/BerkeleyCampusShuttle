@@ -1,5 +1,6 @@
 package net.jessechen.berkeleycampusshuttle;
 
+import net.jessechen.berkeleycampusshuttle.myfavorites.FileHandler;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ import android.widget.TextView;
 public class Route extends Activity {
 	
     private String routeName, stop;
-    private String [] busStops;
+    private String[] busStops;
     private Bundle b, c;
     private TextView title;
     private ListView lv;
@@ -33,13 +34,13 @@ public class Route extends Activity {
         b = getIntent().getExtras();
         routeName = (String) b.getCharSequence("route_name");
         
-        title = (TextView) findViewById(R.id.route_title);
+        title = (TextView) findViewById(R.id.t_route);
         title.setText("Stops for " + routeName);
         
         busStops = b.getStringArray("route");
         java.util.Arrays.sort(busStops);
 
-        lv = (ListView) findViewById(R.id.list);
+        lv = (ListView) findViewById(R.id.l_stops);
         lvAdapter = new ArrayAdapter<String>(this, R.layout.list_item, busStops);
         lv.setAdapter(lvAdapter);
         registerForContextMenu(lv);
@@ -77,7 +78,7 @@ public class Route extends Activity {
     		return false;
     	}
     	stop = (String) lv.getItemAtPosition(info.position);
-    	FavoriteStops.writeToFile(getApplicationContext(), stop);
+    	FileHandler.writeToFile(getApplicationContext(), stop);
     	return true;
     }
 }
