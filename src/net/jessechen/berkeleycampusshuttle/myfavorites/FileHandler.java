@@ -1,6 +1,8 @@
 package net.jessechen.berkeleycampusshuttle.myfavorites;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -22,14 +24,17 @@ public class FileHandler extends Activity {
 
 	public static void writeToFile(Context context, String data) {
 		FileOutputStream fOut = null;
-		BufferedWriter fbw = null;
+		BufferedWriter writer = null;
 
 		try {
 			fOut = context.openFileOutput("favorites.dat", MODE_APPEND);
-			fbw = new BufferedWriter(new OutputStreamWriter(fOut));
-
-			fbw.write(data + "\r");
-			fbw.flush();
+			writer = new BufferedWriter(new OutputStreamWriter(fOut));
+			
+			data.trim();
+			writer.write(data);
+			writer.newLine();
+			writer.flush();
+			data.replace(",", ": ");
 			Toast.makeText(context, data + " added to your favorites",
 					Toast.LENGTH_SHORT).show();
 		} catch (FileNotFoundException f) {
@@ -42,7 +47,7 @@ public class FileHandler extends Activity {
 					.show();
 		} finally {
 			try {
-				fbw.close();
+				writer.close();
 				fOut.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -50,7 +55,33 @@ public class FileHandler extends Activity {
 		}
 	}
 
-	protected static String readFile(Context context) {
+	protected static boolean deleteLine(Context context, String toDelete) throws IOException {
+
+		File inputFile = new File("/data/data/net.jessechen.berkeleycampusshuttle/files/favorites.dat");
+		File tempFile = new File("/data/data/net.jessechen.berkeleycampusshuttle/files/favorites.tmp");
+		
+		FileOutputStream fOut = context.openFileOutput("favorites.tmp", MODE_APPEND);
+		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(context.openFileInput("favorites.dat")));
+		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fOut));
+
+		String currentLine;
+		
+		while ((currentLine = reader.readLine()) != null) {
+			String trimmedLine = currentLine.trim();
+			if (trimmedLine.equals(toDelete)) continue;
+			writer.write(currentLine);
+			writer.newLine();
+			writer.flush();
+		}
+		
+		writer.close();
+		reader.close();
+		
+		return tempFile.renameTo(inputFile);
+	}
+	
+	protected static String readFile(Context context) throws FileNotFoundException {
 		FileInputStream fIn = null;
 		InputStreamReader isr = null;
 		char[] inputBuffer = new char[255];
@@ -60,18 +91,16 @@ public class FileHandler extends Activity {
 			isr = new InputStreamReader(fIn);
 			isr.read(inputBuffer);
 			data = new String(inputBuffer);
-			Toast.makeText(context, "Favorites read", Toast.LENGTH_SHORT)
-					.show();
 		} catch (FileNotFoundException f) {
-			return null;
+			throw f;
 		} catch (Exception e) {
 			e.printStackTrace();
 			Toast.makeText(context, "Something went wrong..", Toast.LENGTH_SHORT)
 			.show();
 		} finally {
 			try {
-				isr.close();
-				fIn.close();
+				if (isr != null) isr.close();
+				if (fIn != null) fIn.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

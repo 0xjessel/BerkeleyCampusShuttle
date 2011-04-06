@@ -44,7 +44,6 @@ public class Route extends Activity {
         lvAdapter = new ArrayAdapter<String>(this, R.layout.list_item, busStops);
         lv.setAdapter(lvAdapter);
         registerForContextMenu(lv);
-        lv.setTextFilterEnabled(true);
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,

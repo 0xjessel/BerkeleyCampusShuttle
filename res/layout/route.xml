@@ -17,6 +17,7 @@
  		android:id="@+id/l_stops"
  		android:layout_width="fill_parent"
  		android:layout_height="wrap_content"
- 		android:layout_below="@id/t_route" />
+ 		android:layout_below="@id/t_route"
+ 		android:textFilterEnabled="true" />
  		
 </RelativeLayout>

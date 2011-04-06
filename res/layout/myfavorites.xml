@@ -18,6 +18,18 @@
 		android:id="@+id/l_favorites"
  		android:layout_width="fill_parent"
  		android:layout_height="wrap_content"
+ 		android:layout_below="@id/t_myfavorites"
+ 		android:textFilterEnabled="true"/>
+ 
+ 	<TextView
+ 		android:id="@+id/emptyfavlist"
+ 		android:layout_width="fill_parent"
+ 		android:layout_height="fill_parent"
+ 		android:text="@string/emptyfavlist"
+ 		android:textSize="20dp"
+ 		android:layout_marginLeft="6dp"
+ 		android:paddingTop="15dp"
+ 		android:visibility="invisible"
  		android:layout_below="@id/t_myfavorites"/>
   
 </RelativeLayout>

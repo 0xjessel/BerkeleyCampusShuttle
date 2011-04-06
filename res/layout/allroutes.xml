@@ -1,66 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout 
+<ScrollView
 	xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lay_wrapper"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
-    <LinearLayout android:id="@+id/lay_action"
-        android:layout_width="fill_parent"
-        android:gravity="center_horizontal"
-        android:layout_height="wrap_content">
-        <TextView 
-        	android:text="@string/allroutes" 
-        	android:layout_width="wrap_content" 
-        	android:layout_height="80dp" 
-        	android:id="@+id/t_allroutes"
-        	android:paddingTop="15dp"
-			android:textColor="#FFFFFF" 
-			android:textSize="25dp"/>
-	</LinearLayout>
-    <RelativeLayout android:id="@+id/lay_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_below="@id/lay_action"
-        android:paddingTop="25dp"
-        android:layout_centerInParent="true">
+    android:layout_height="fill_parent">
+	<RelativeLayout 
+		xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/lay_wrapper"
+    	android:layout_width="fill_parent"
+   		android:layout_height="wrap_content">
+    	<LinearLayout android:id="@+id/lay_action"
+       		android:layout_width="fill_parent"
+        	android:gravity="center_horizontal"
+        	android:layout_height="wrap_content">
+        	<TextView 
+        		android:text="@string/allroutes" 
+        		android:layout_width="wrap_content" 
+        		android:layout_height="80dp" 
+        		android:id="@+id/t_allroutes"
+        		android:paddingTop="15dp"
+				android:textColor="#FFFFFF" 
+				android:textSize="25dp"/>
+		</LinearLayout>
+    	<RelativeLayout 
+    		android:id="@+id/lay_main"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content" 
+        	android:layout_below="@id/lay_action"
+        	android:paddingTop="25dp"
+        	android:layout_centerInParent="true">
 
-	   	<ImageButton android:id="@+id/buttonP"
-	   		android:src="@drawable/p"
-    		android:scaleType="fitXY"
-    		android:padding="25dp"
-      		android:layout_width="100dp"
-     	    android:layout_height="100dp"
-       		android:drawableTop="@drawable/p" 
-       		android:gravity="center|fill_horizontal|center_vertical|center_horizontal|right" 
-       		android:layout_centerInParent="false" 
-       		android:layout_alignParentTop="true"/>
+	   		<ImageButton android:id="@+id/buttonP"
+	   			android:src="@drawable/p"
+    			android:scaleType="fitXY"
+    			android:padding="25dp"
+      			android:layout_width="100dp"
+     	    	android:layout_height="100dp"
+       			android:drawableTop="@drawable/p" 
+       			android:gravity="center|fill_horizontal|center_vertical|center_horizontal|right" 
+       			android:layout_centerInParent="false" 
+       			android:layout_alignParentTop="true"/>
 
-    	<ImageButton android:id="@+id/buttonR"
-    		android:src="@drawable/r"
-    		android:scaleType="fitXY"
-    		android:padding="25dp"
-    	  	android:layout_width="100dp"
-    	    android:layout_height="100dp"
-     	    android:layout_toRightOf="@id/buttonP"
-     	    android:drawableTop="@drawable/r"/>
+    		<ImageButton android:id="@+id/buttonR"
+    			android:src="@drawable/r"
+    			android:scaleType="fitXY"
+    			android:padding="25dp"
+    	  		android:layout_width="100dp"
+    	    	android:layout_height="100dp"
+     	    	android:layout_toRightOf="@id/buttonP"
+     	    	android:drawableTop="@drawable/r"/>
 
-       	<ImageButton android:id="@+id/buttonC"
-       		android:src="@drawable/c"
-    		android:scaleType="fitXY"
-    		android:padding="25dp"
-       		android:layout_width="100dp"
-          	android:layout_height="100dp"
-            android:layout_below="@id/buttonP"
-            android:drawableTop="@drawable/c"/>
+       		<ImageButton android:id="@+id/buttonC"
+       			android:src="@drawable/c"
+    			android:scaleType="fitXY"
+    			android:padding="25dp"
+       			android:layout_width="100dp"
+          		android:layout_height="100dp"
+            	android:layout_below="@id/buttonP"
+            	android:drawableTop="@drawable/c"/>
 
-        <ImageButton android:id="@+id/buttonH"
-			android:src="@drawable/h"
-    		android:scaleType="fitXY"
-    		android:padding="25dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_toRightOf="@id/buttonC"
-            android:layout_below="@id/buttonR"
-            android:drawableTop="@drawable/h"/>
-    </RelativeLayout>
-</RelativeLayout>
+        	<ImageButton android:id="@+id/buttonH"
+				android:src="@drawable/h"
+    			android:scaleType="fitXY"
+    			android:padding="25dp"
+            	android:layout_width="100dp"
+            	android:layout_height="100dp"
+            	android:layout_toRightOf="@id/buttonC"
+            	android:layout_below="@id/buttonR"
+            	android:drawableTop="@drawable/h"/>
+    	</RelativeLayout>
+	</RelativeLayout>
+</ScrollView>

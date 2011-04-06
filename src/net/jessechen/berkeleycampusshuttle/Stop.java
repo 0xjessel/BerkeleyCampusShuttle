@@ -176,12 +176,12 @@ public class Stop extends Activity {
 			/* Get the XMLReader of the SAXParser we created. */
 			XMLReader xr = sp.getXMLReader();
 			/* Create a new ContentHandler and apply it to the XML-Reader */
-			ManHandler myExampleHandler = new ManHandler();
+			SaxParser myExampleHandler = new SaxParser();
 			xr.setContentHandler(myExampleHandler);
 			/* Parse the xml-data from our URL. */
 			xr.parse(new InputSource(istream));
 			/* Parsing has finished. */
-			result = ManHandler.getResult();
+			result = SaxParser.getResult();
 		} catch (Exception FileNotFoundException) {
 			FileNotFoundException.printStackTrace();
 		}

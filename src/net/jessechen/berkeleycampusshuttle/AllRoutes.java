@@ -1,5 +1,9 @@
 package net.jessechen.berkeleycampusshuttle;
 
+import net.jessechen.berkeleycampusshuttle.routes.CENTRAL;
+import net.jessechen.berkeleycampusshuttle.routes.HILL;
+import net.jessechen.berkeleycampusshuttle.routes.PERIMETER;
+import net.jessechen.berkeleycampusshuttle.routes.REVERSE;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,8 +35,8 @@ public class AllRoutes extends Activity {
         		intent = new Intent(AllRoutes.this, Route.class);        		
         		b = new Bundle();
         		b.putStringArray("route", getResources().getStringArray(R.array.p_stops));
-        		b.putCharSequence("route_name", "Perimeter");
-        		b.putInt("xml", R.raw.ptimes);
+        		b.putCharSequence("route_name", PERIMETER.getName());
+        		b.putInt("xml", PERIMETER.getXML());
         		intent.putExtras(b);
         		startActivity(intent);
         	}
@@ -44,8 +48,8 @@ public class AllRoutes extends Activity {
         		intent = new Intent(AllRoutes.this, Route.class);
         		b = new Bundle();
         		b.putStringArray("route", getResources().getStringArray(R.array.r_stops));
-        		b.putCharSequence("route_name", "Reverse");
-        		b.putInt("xml", R.raw.rtimes);
+        		b.putCharSequence("route_name", REVERSE.getName());
+        		b.putInt("xml", REVERSE.getXML());
         		intent.putExtras(b);
         		startActivity(intent);
         	}
@@ -57,8 +61,8 @@ public class AllRoutes extends Activity {
         		intent = new Intent(AllRoutes.this, Route.class);
         		b = new Bundle();
         		b.putStringArray("route", getResources().getStringArray(R.array.c_stops));
-        		b.putCharSequence("route_name", "Central Campus Southside");
-        		b.putInt("xml", R.raw.ctimes);
+        		b.putCharSequence("route_name", CENTRAL.getName());
+        		b.putInt("xml", CENTRAL.getXML());
         		intent.putExtras(b);
         		startActivity(intent);
         	}
@@ -70,8 +74,8 @@ public class AllRoutes extends Activity {
         		intent = new Intent(AllRoutes.this, Route.class);
         		b = new Bundle();
         		b.putStringArray("route", getResources().getStringArray(R.array.h_stops));
-        		b.putCharSequence("route_name", "Hill");
-        		b.putInt("xml", R.raw.htimes);
+        		b.putCharSequence("route_name", HILL.getName());
+        		b.putInt("xml", HILL.getXML());
         		intent.putExtras(b);
         		startActivity(intent);
         	}
