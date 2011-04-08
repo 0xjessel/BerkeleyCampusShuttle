@@ -22,6 +22,7 @@
 <activity android:name=".Stop"></activity>
 <activity android:name=".Route"></activity>
 <activity android:name=".myfavorites.MyFavorites"></activity>
+<activity android:name=".myfavorites.FileHandler"></activity>
 
 </application>
 </manifest> 

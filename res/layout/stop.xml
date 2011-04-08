@@ -42,7 +42,9 @@
 	<Button 
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content" 
+		android:layout_marginLeft="60dp"
+		android:layout_marginRight="60dp"
 		android:layout_alignParentBottom="true" 
-		android:text="Refresh" 
-		android:id="@+id/b_refresh"/>  
+		android:text="@string/addtofav" 
+		android:id="@+id/b_addtofav"/>  
 </RelativeLayout>

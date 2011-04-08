@@ -7,11 +7,14 @@ import java.util.Calendar;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import net.jessechen.berkeleycampusshuttle.myfavorites.FileHandler;
+
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -28,7 +31,7 @@ public class Stop extends Activity {
 	private static int[][] result;
 	private static int hourRemaining, minuteRemaining, curHour, curMinute, dayOfWeek;
 	private MyCount counter1, counter2, counter3;
-	private static Button refreshButton;
+	private static Button addToFavButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,17 +50,18 @@ public class Stop extends Activity {
 		countdown2 = (TextView) findViewById(R.id.countdown2);
 		countdown3 = (TextView) findViewById(R.id.countdown3);
 		
-		refresh();
+		calculate();
 
-		refreshButton = (Button) findViewById(R.id.b_refresh);
-		refreshButton.setOnClickListener(new OnClickListener() {
+		addToFavButton = (Button) findViewById(R.id.b_addtofav);
+		addToFavButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				refresh();
+				startActivity(new Intent(Stop.this, FileHandler.class));
+		    	FileHandler.writeToFile(getApplicationContext(), routeName + "," + busStop);
 			}
 		});
 	}
 
-	public void refresh() {
+	public void calculate() {
 		countdown1.invalidate(); // do i need this
 		countdown2.invalidate();
 		countdown3.invalidate();
@@ -149,7 +153,7 @@ public class Stop extends Activity {
 			if (counter2 != null) { counter2.cancel();}
 			countdown3.setText("");
 			if (counter3 != null) { counter3.cancel();}
-			refresh();
+			calculate();
 		}
 		
 		@Override
@@ -176,12 +180,12 @@ public class Stop extends Activity {
 			/* Get the XMLReader of the SAXParser we created. */
 			XMLReader xr = sp.getXMLReader();
 			/* Create a new ContentHandler and apply it to the XML-Reader */
-			SaxParser myExampleHandler = new SaxParser();
+			SaxyParser myExampleHandler = new SaxyParser();
 			xr.setContentHandler(myExampleHandler);
 			/* Parse the xml-data from our URL. */
 			xr.parse(new InputSource(istream));
 			/* Parsing has finished. */
-			result = SaxParser.getResult();
+			result = SaxyParser.getResult();
 		} catch (Exception FileNotFoundException) {
 			FileNotFoundException.printStackTrace();
 		}

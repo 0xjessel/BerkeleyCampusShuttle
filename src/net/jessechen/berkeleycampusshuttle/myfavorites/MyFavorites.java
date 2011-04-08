@@ -1,6 +1,5 @@
 package net.jessechen.berkeleycampusshuttle.myfavorites;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,11 +15,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -31,9 +30,7 @@ import android.widget.Toast;
 
 public class MyFavorites extends Activity {
 
-	private String tempFavorites;
-	private String[] favorites, trimFavorites;
-	private int toCopy;
+	private String[] favorites;
 	private Intent intent;
 	private Bundle c;
 	private ListView lv;
@@ -47,46 +44,35 @@ public class MyFavorites extends Activity {
 		setContentView(R.layout.myfavorites);
 
 		lv = (ListView) findViewById(R.id.l_favorites);
+		favorites = FileHandler.readFileWrapper(this);
 
-		try { // readFile can throw FileNotFoundException
-			tempFavorites = FileHandler.readFile(this);
-
-			favorites = tempFavorites.split("\n");
-			// trim junk off
-			toCopy = (favorites.length > 1) ? favorites.length - 1 : 0;
-			trimFavorites = new String[toCopy];
-			System.arraycopy(favorites, 0, trimFavorites, 0, toCopy);
-
-			lvAdapter = new mAdapter(this, R.layout.favlist_item,
-					new ArrayList<String>(Arrays.asList(trimFavorites)));
-			if (lvAdapter.getCount() == 0) {
-				setOnEmpty();
-			}
-			lv.setAdapter(lvAdapter);
-			registerForContextMenu(lv);
-
-			lv.setOnItemClickListener(new OnItemClickListener() {
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {
-					intent = new Intent(MyFavorites.this, Stop.class);
-
-					String[] descrip = ((ImageView) view
-							.findViewById(R.id.favlistpic))
-							.getContentDescription().toString().split(",");
-
-					c = new Bundle();
-					c.putCharSequence("stop", ((TextView) view
-							.findViewById(R.id.favlisttext)).getText());
-					c.putCharSequence("route", descrip[0]);
-					c.putInt("xml", Integer.parseInt(descrip[1]));
-					intent.putExtras(c);
-
-					startActivity(intent);
-				}
-			});
-		} catch (FileNotFoundException e) {
+		lvAdapter = new mAdapter(this, R.layout.favlist_item,
+				new ArrayList<String>(Arrays.asList(favorites)));
+		if (lvAdapter.getCount() == 0) {
 			setOnEmpty();
 		}
+		lv.setAdapter(lvAdapter);
+		registerForContextMenu(lv);
+
+		lv.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				intent = new Intent(MyFavorites.this, Stop.class);
+
+				String[] descrip = ((ImageView) view
+						.findViewById(R.id.favlistpic)).getContentDescription()
+						.toString().split(",");
+
+				c = new Bundle();
+				c.putCharSequence("stop", ((TextView) view
+						.findViewById(R.id.favlisttext)).getText());
+				c.putCharSequence("route", descrip[0]);
+				c.putInt("xml", Integer.parseInt(descrip[1]));
+				intent.putExtras(c);
+
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override

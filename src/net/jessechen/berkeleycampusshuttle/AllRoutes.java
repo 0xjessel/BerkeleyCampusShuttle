@@ -10,12 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class AllRoutes extends Activity {
 	
-	@SuppressWarnings("unused")
-	private TextView title;
 	private ImageButton pButton, rButton, cButton, hButton;
 	private Bundle b;
 	private Intent intent;
@@ -27,14 +24,12 @@ public class AllRoutes extends Activity {
 
         setContentView(R.layout.allroutes);
         
-        title = (TextView) findViewById(R.id.t_allroutes);
-        
         pButton = (ImageButton) findViewById(R.id.buttonP);
         pButton.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		intent = new Intent(AllRoutes.this, Route.class);        		
         		b = new Bundle();
-        		b.putStringArray("route", getResources().getStringArray(R.array.p_stops));
+        		b.putStringArray("route", PERIMETER.getStops(getApplicationContext()));
         		b.putCharSequence("route_name", PERIMETER.getName());
         		b.putInt("xml", PERIMETER.getXML());
         		intent.putExtras(b);
@@ -47,7 +42,7 @@ public class AllRoutes extends Activity {
         	public void onClick(View v) {
         		intent = new Intent(AllRoutes.this, Route.class);
         		b = new Bundle();
-        		b.putStringArray("route", getResources().getStringArray(R.array.r_stops));
+        		b.putStringArray("route", REVERSE.getStops(getApplicationContext()));
         		b.putCharSequence("route_name", REVERSE.getName());
         		b.putInt("xml", REVERSE.getXML());
         		intent.putExtras(b);
@@ -60,7 +55,7 @@ public class AllRoutes extends Activity {
         	public void onClick(View v) {
         		intent = new Intent(AllRoutes.this, Route.class);
         		b = new Bundle();
-        		b.putStringArray("route", getResources().getStringArray(R.array.c_stops));
+        		b.putStringArray("route", CENTRAL.getStops(getApplicationContext()));
         		b.putCharSequence("route_name", CENTRAL.getName());
         		b.putInt("xml", CENTRAL.getXML());
         		intent.putExtras(b);
@@ -73,7 +68,7 @@ public class AllRoutes extends Activity {
         	public void onClick(View v) {
         		intent = new Intent(AllRoutes.this, Route.class);
         		b = new Bundle();
-        		b.putStringArray("route", getResources().getStringArray(R.array.h_stops));
+        		b.putStringArray("route", HILL.getStops(getApplicationContext()));
         		b.putCharSequence("route_name", HILL.getName());
         		b.putInt("xml", HILL.getXML());
         		intent.putExtras(b);

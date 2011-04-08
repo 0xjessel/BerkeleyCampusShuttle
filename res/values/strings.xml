@@ -4,6 +4,7 @@
 	<string name="allstops">All Stops</string>
 	<string name="allroutes">All Routes</string>
 	<string name="myfavorites">My Favorites</string>
+	<string name="addtofav">Add to Favorites</string>
 	<string name="emptyfavlist">No favorites added yet! Long-press on a stop to add
 		to favorites.</string>
 	<string-array name="all_stops">

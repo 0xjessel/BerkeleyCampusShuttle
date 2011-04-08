@@ -65,7 +65,7 @@ public class Route extends Activity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		menu.add("Add to Favorites");
+		menu.add(R.string.addtofav);
 	}
     
     @Override
