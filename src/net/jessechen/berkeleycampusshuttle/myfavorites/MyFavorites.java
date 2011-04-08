@@ -28,6 +28,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * MyFavorites is the activity that display favorite stops that the user has
+ * saved. When the user adds a stop to their favorites, it is displayed here
+ * where they can quickly jump to the predictions for the given stop
+ * 
+ * @author Jesse Chen
+ * 
+ */
 public class MyFavorites extends Activity {
 
 	private String[] favorites;
@@ -106,12 +114,31 @@ public class MyFavorites extends Activity {
 		return true;
 	}
 
+	/**
+	 * When the user has not added any favorites yet, we need to show a TextView
+	 * that notifies them that they have no favorites yet and describe how to
+	 * add favorites
+	 * 
+	 */
 	private void setOnEmpty() { // show empty favorites dialog
 		TextView empty = (TextView) findViewById(R.id.emptyfavlist);
 		empty.setVisibility(View.VISIBLE);
 		lv.setEmptyView(empty);
 	}
 
+	/**
+	 * Custom ArrayAdapter that is used to show the route icon as well as the
+	 * stop.
+	 * 
+	 * The current implementation uses a hack that embeds the xml ID of the
+	 * corresponding route and the name of that route in the ImageView content
+	 * description. Bad practice because eyes-free users using a screenreader
+	 * uses the content description field to figure out what a button, or image
+	 * do/is.
+	 * 
+	 * @author Jesse Chen
+	 * 
+	 */
 	private class mAdapter extends ArrayAdapter<String> {
 		private ArrayList<String> items;
 

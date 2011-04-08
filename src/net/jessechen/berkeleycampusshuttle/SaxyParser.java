@@ -12,8 +12,15 @@ public class SaxyParser extends DefaultHandler {
 	private int hour, numResults = 0;
 	private StringBuilder buf = null;
 	public static final int TOTAL_MINS = 3;
-	private static int result[][] = {{-1, -1}, {-1, -1}, {-1, -1}}; // return 3 predictions, each with hour and minute
-	
+	private static int result[][] = { { -1, -1 }, { -1, -1 }, { -1, -1 } }; // return
+																			// 3
+																			// predictions,
+																			// each
+																			// with
+																			// hour
+																			// and
+																			// minute
+
 	@Override
 	public void startDocument() throws SAXException {
 	}
@@ -28,7 +35,8 @@ public class SaxyParser extends DefaultHandler {
 		if (localName.equals("minute") || localName.equals("name")) {
 			buf = new StringBuilder();
 		} else if (localName.equals("hour")) {
-			hour = Short.parseShort(atts.getValue("value")); // get the hour value
+			// get the hour value
+			hour = Short.parseShort(atts.getValue("value"));
 			if (correct_stop && !correct_hour) {
 				int curHour = Stop.getCurHour();
 				if (hour == curHour) {
@@ -44,13 +52,13 @@ public class SaxyParser extends DefaultHandler {
 
 	@Override
 	public void characters(char ch[], int start, int length) {
-	    if (buf != null) {
-	        for (int i = start; i < start + length; i++) {
-	            buf.append(ch[i]);
-	        }
-	    }
+		if (buf != null) {
+			for (int i = start; i < start + length; i++) {
+				buf.append(ch[i]);
+			}
+		}
 	}
-	
+
 	@Override
 	public void endElement(String namespaceURI, String localName, String qName)
 			throws SAXException {
@@ -60,10 +68,13 @@ public class SaxyParser extends DefaultHandler {
 				int minute = Short.parseShort(buf.toString());
 				if (!same_hour && numResults != TOTAL_MINS) {
 					result[numResults][0] = hour;
-					result[numResults][1] = minute; // get the first minute value if not in the same hour
+					// get the first minute value if not in the same hour
+					result[numResults][1] = minute;
 					numResults++;
-				} else if ((minute > curMinute) && numResults != TOTAL_MINS) { //minute == curMinute || 
+				} else if (same_hour && (minute > curMinute)
+						&& numResults != TOTAL_MINS) {
 					result[numResults][0] = hour;
+					// get the first minute that is greater than current minute.
 					result[numResults][1] = minute;
 					numResults++;
 				}
@@ -71,12 +82,15 @@ public class SaxyParser extends DefaultHandler {
 					done = true;
 				}
 			}
-		} if (localName.equals("hour")) {
-			if (!done) { // did not find a valid minute value in this hour
-				same_hour = false; // reset boolean values
+		}
+		if (localName.equals("hour")) {
+			if (!done) { 
+				// did not find a valid minute value in this hour
+				// then reset boolean values
+				same_hour = false; 
 				correct_hour = false;
 			}
-		
+
 		} else if (localName.equals("name")) {
 			CharSequence s = Stop.getBusStop();
 			if (buf.toString().equals(s)) {
@@ -87,7 +101,7 @@ public class SaxyParser extends DefaultHandler {
 		}
 		buf = null;
 	}
-	
+
 	public static int[][] getResult() {
 		return result;
 	}

@@ -16,6 +16,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
 
+/**
+ * @author Jesse Chen
+ * 
+ *         FileHandler handles read, write, and delete operations to
+ *         favorites.dat
+ * 
+ */
 public class FileHandler extends Activity {
 
 	private static ArrayList<String> myFavorites = new ArrayList<String>();
@@ -24,8 +31,13 @@ public class FileHandler extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	}
 
-	// This is used prior to writing to the file to check if
-	// the specified stop is already in the file.
+	/**
+	 * This is used prior to writing to the file to check if the specified stop
+	 * is already in the file.
+	 * 
+	 * @param context
+	 * @return a string[] representation of the file contents split by newline
+	 */
 	public static String[] readFileWrapper(Context context) {
 		String tempFavorites = null;
 		String[] favorites = null;
@@ -38,13 +50,21 @@ public class FileHandler extends Activity {
 			toCopy = (favorites.length > 1) ? favorites.length - 1 : 0;
 			trimFavorites = new String[toCopy];
 			System.arraycopy(favorites, 0, trimFavorites, 0, toCopy);
-			
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return trimFavorites;
 	}
 
+	/**
+	 * creates "favorites.dat" file if it doesn't exist, otherwise it takes the
+	 * data and appends it to the end of file
+	 * 
+	 * @param context
+	 * @param data
+	 *            string to be written
+	 */
 	public static void writeToFile(Context context, String data) {
 		FileOutputStream fOut = null;
 		BufferedWriter writer = null;
@@ -60,7 +80,7 @@ public class FileHandler extends Activity {
 			for (String favorite : favorites) {
 				myFavorites.add(favorite);
 			}
-			
+
 			if (!myFavorites.contains(data)) {
 				myFavorites.add(data);
 				writer.write(data);
@@ -91,8 +111,16 @@ public class FileHandler extends Activity {
 		}
 	}
 
-	// deleteLine copies the file to a temp file except for the specified
-	// string, and at the end, it renames the temp file to the original.
+	/**
+	 * copies the file to a temp file except for the specified string, and at
+	 * the end, it renames the temp file to the original.
+	 * 
+	 * @param context
+	 * @param toDelete
+	 *            string that you wish to delete from file
+	 * @return true, if operation was successful
+	 * @throws IOException
+	 */
 	protected static boolean deleteLine(Context context, String toDelete)
 			throws IOException {
 
@@ -127,6 +155,14 @@ public class FileHandler extends Activity {
 		return tempFile.renameTo(inputFile);
 	}
 
+	/**
+	 * Reads favorites.dat and outputs it in a string, use readFileWrapper to
+	 * have it convert the string into a string array split by newline
+	 * 
+	 * @param context
+	 * @return string representation of favorites.dat
+	 * @throws FileNotFoundException
+	 */
 	protected static String readFile(Context context)
 			throws FileNotFoundException {
 		FileInputStream fIn = null;
