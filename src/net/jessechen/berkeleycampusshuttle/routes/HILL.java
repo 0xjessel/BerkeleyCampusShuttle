@@ -3,17 +3,19 @@ package net.jessechen.berkeleycampusshuttle.routes;
 import android.content.Context;
 import net.jessechen.berkeleycampusshuttle.R;
 
-public class HILL {
-	private final static String name = "Hill";
-	private final static int xml = R.raw.htimes;
-	private static String[] stops;
+/**
+ * HILL is the class that contains all relevant data for the H route.
+ * Contains the name of the route, XML ID of the schedule, and an array of the
+ * names of the stops they go to. 
+ * 
+ * @author Jesse Chen
+ *
+ */
+public class HILL extends GenericRoute {
 	
-	public static String getName() {
-		return HILL.name;
-	}
-	
-	public static int getXML() {
-		return HILL.xml;
+	public HILL() {
+		name = "Hill";
+		xml = R.raw.htimes;
 	}
 	
 	public static String[] getStops(Context c) {

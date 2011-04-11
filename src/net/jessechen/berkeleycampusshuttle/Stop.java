@@ -75,8 +75,8 @@ public class Stop extends Activity {
 	/**
 	 * This method takes care of the three CountDownTimers by pulling data from
 	 * the XML file and initializing them. Also takes care of cases when there
-	 * are no more predictions, and when user is viewing this on a weekend
-	 * (campus shuttle does not run on weekends).
+	 * are no more predictions for the day , and when user is viewing this on a
+	 * weekend (campus shuttle does not run on weekends).
 	 * 
 	 */
 	public void calculate() {

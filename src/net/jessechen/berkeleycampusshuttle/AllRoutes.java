@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 
 /**
  * AllRoutes is the activity that displays to the user 4 ImageButtons for the
- * user to pick from. The four routes that Berkeley Campus Shuttle has is the
+ * user to pick from. The four routes that Berkeley Campus Shuttle have is the
  * Perimeter, Reverse, Central Campus Southside, and Hill. When the user picks a
  * specific route, it will start the Route activity.
  * 

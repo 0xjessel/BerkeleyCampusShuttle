@@ -32,11 +32,15 @@ public class FileHandler extends Activity {
 	}
 
 	/**
-	 * This is used prior to writing to the file to check if the specified stop
-	 * is already in the file.
+	 * The method readFile returns a String representation of the entire file.
+	 * readFileWrapper encapsulates that method and parses the returned String
+	 * into a neater String[].
+	 * 
+	 * This is also used prior to writing to the file to check if the specified
+	 * stop is already in the file. 
 	 * 
 	 * @param context
-	 * @return a string[] representation of the file contents split by newline
+	 * @return a String[] representation of the file contents split by newline
 	 */
 	public static String[] readFileWrapper(Context context) {
 		String tempFavorites = null;
@@ -59,7 +63,7 @@ public class FileHandler extends Activity {
 
 	/**
 	 * creates "favorites.dat" file if it doesn't exist, otherwise it takes the
-	 * data and appends it to the end of file
+	 * passed in data and appends it to the end of file.
 	 * 
 	 * @param context
 	 * @param data
@@ -112,7 +116,7 @@ public class FileHandler extends Activity {
 	}
 
 	/**
-	 * copies the file to a temp file except for the specified string, and at
+	 * copies the file to a temp file except for the specified String, and at
 	 * the end, it renames the temp file to the original.
 	 * 
 	 * @param context
@@ -156,7 +160,7 @@ public class FileHandler extends Activity {
 	}
 
 	/**
-	 * Reads favorites.dat and outputs it in a string, use readFileWrapper to
+	 * Reads favorites.dat and outputs it in a String, use readFileWrapper to
 	 * have it convert the string into a string array split by newline
 	 * 
 	 * @param context

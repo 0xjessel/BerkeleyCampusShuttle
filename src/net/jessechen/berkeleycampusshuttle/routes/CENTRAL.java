@@ -3,17 +3,19 @@ package net.jessechen.berkeleycampusshuttle.routes;
 import android.content.Context;
 import net.jessechen.berkeleycampusshuttle.R;
 
-public class CENTRAL {
-	private final static String name = "Central Campus Southside";
-	private final static int xml = R.raw.ctimes;
-	private static String[] stops;
+/**
+ * CENTRAL is the class that contains all relevant data for the C route.
+ * Contains the name of the route, XML ID of the schedule, and an array of the
+ * names of the stops they go to.  
+ * 
+ * @author Jesse Chen
+ * 
+ */
+public class CENTRAL extends GenericRoute {
 	
-	public static String getName() {
-		return CENTRAL.name;
-	}
-	
-	public static int getXML() {
-		return CENTRAL.xml;
+	public CENTRAL() {
+		name = "Central Campus Southside";
+		xml = R.raw.ctimes;
 	}
 	
 	public static String[] getStops(Context c) {

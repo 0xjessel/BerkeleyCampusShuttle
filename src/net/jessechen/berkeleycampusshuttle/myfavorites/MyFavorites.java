@@ -117,7 +117,7 @@ public class MyFavorites extends Activity {
 	/**
 	 * When the user has not added any favorites yet, we need to show a TextView
 	 * that notifies them that they have no favorites yet and describe how to
-	 * add favorites
+	 * add favorites.
 	 * 
 	 */
 	private void setOnEmpty() { // show empty favorites dialog
