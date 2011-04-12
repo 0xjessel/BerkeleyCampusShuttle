@@ -19,7 +19,7 @@
  ******************************************************************************/
 package net.jessechen.berkeleycampusshuttle;
 
-import net.jessechen.berkeleycampusshuttle.routes.GenericRoute;
+import net.jessechen.berkeleycampusshuttle.routes.RoutesUtil;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -48,7 +48,7 @@ public class AllStops extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		ALL_STOPS = GenericRoute.getAllStops(getApplicationContext());
+		ALL_STOPS = RoutesUtil.getAllStops(getApplicationContext());
 		setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item,
 				ALL_STOPS));
 

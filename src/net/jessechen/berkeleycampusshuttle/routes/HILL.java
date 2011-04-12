@@ -19,6 +19,7 @@
  ******************************************************************************/
 package net.jessechen.berkeleycampusshuttle.routes;
 
+import android.content.Context;
 import net.jessechen.berkeleycampusshuttle.R;
 
 /**
@@ -29,11 +30,23 @@ import net.jessechen.berkeleycampusshuttle.R;
  * @author Jesse Chen
  * 
  */
-public class HILL extends GenericRoute {
+public class HILL {
+	
+	private static String name = "Hill";
+	private static int xml = R.raw.htimes, stopsArray = R.array.h_stops;
+	private static String[] stops;
 
-	public HILL() {
-		name = "Hill";
-		xml = R.raw.htimes;
-		stopsArray = R.array.h_stops;
+	public static String getName() {
+		return name;
+	}
+
+	public static int getXML() {
+		return xml;
+	}
+
+	public static String[] getStops(Context c) {
+		stops = c.getResources().getStringArray(stopsArray);
+		java.util.Arrays.sort(stops);
+		return stops;
 	}
 }

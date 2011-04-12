@@ -19,6 +19,7 @@
  ******************************************************************************/
 package net.jessechen.berkeleycampusshuttle.routes;
 
+import android.content.Context;
 import net.jessechen.berkeleycampusshuttle.R;
 
 /**
@@ -29,11 +30,23 @@ import net.jessechen.berkeleycampusshuttle.R;
  * @author Jesse Chen
  *
  */
-public class PERIMETER extends GenericRoute {
+public class PERIMETER {
 	
-	public PERIMETER() {
-		name = "Perimeter";
-		xml = R.raw.ptimes;
-		stopsArray = R.array.p_stops;
+	private static String name = "Perimeter";
+	private static int xml = R.raw.ptimes, stopsArray = R.array.p_stops;
+	private static String[] stops;
+
+	public static String getName() {
+		return name;
+	}
+
+	public static int getXML() {
+		return xml;
+	}
+
+	public static String[] getStops(Context c) {
+		stops = c.getResources().getStringArray(stopsArray);
+		java.util.Arrays.sort(stops);
+		return stops;
 	}
 }

@@ -23,26 +23,14 @@ import java.util.LinkedList;
 
 import android.content.Context;
 
-public class GenericRoute {
+/**
+ * RoutesUtil is a class that contains helpful methods that concerns routes
+ * 
+ * @author Jesse Chen
+ * 
+ */
+public class RoutesUtil {
 
-	protected static String name;
-	protected static int xml, stopsArray;
-	protected static String[] stops;
-
-	public static String getName() {
-		return name;
-	}
-
-	public static int getXML() {
-		return xml;
-	}
-
-	public static String[] getStops(Context c) {
-		stops = c.getResources().getStringArray(stopsArray);
-		java.util.Arrays.sort(stops);
-		return stops;
-	}
-	
 	/**
 	 * Pulls every route's stops array and concatenates them, takes care of
 	 * duplicates.
@@ -56,13 +44,14 @@ public class GenericRoute {
 		addToAllStops(allStops, REVERSE.getStops(c));
 		addToAllStops(allStops, HILL.getStops(c));
 		addToAllStops(allStops, CENTRAL.getStops(c));
-		
+
 		String[] toReturn = allStops.toArray(new String[allStops.size()]);
 		java.util.Arrays.sort(toReturn);
 		return toReturn;
 	}
 
-	private static void addToAllStops(LinkedList<String> allStops, String[] stops) {
+	private static void addToAllStops(LinkedList<String> allStops,
+			String[] stops) {
 		for (int i = 0; i < stops.length; i++) {
 			if (!allStops.contains(stops[i])) {
 				allStops.add(stops[i]);
