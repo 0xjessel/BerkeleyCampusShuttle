@@ -26,7 +26,7 @@ import android.content.Context;
 public class GenericRoute {
 
 	protected static String name;
-	protected static int xml;
+	protected static int xml, stopsArray;
 	protected static String[] stops;
 
 	public static String getName() {
@@ -37,7 +37,9 @@ public class GenericRoute {
 		return xml;
 	}
 
-	public static String[] getStops() {
+	public static String[] getStops(Context c) {
+		stops = c.getResources().getStringArray(stopsArray);
+		java.util.Arrays.sort(stops);
 		return stops;
 	}
 	

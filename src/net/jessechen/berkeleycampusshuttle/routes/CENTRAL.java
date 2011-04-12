@@ -19,7 +19,6 @@
  ******************************************************************************/
 package net.jessechen.berkeleycampusshuttle.routes;
 
-import android.content.Context;
 import net.jessechen.berkeleycampusshuttle.R;
 
 /**
@@ -35,10 +34,6 @@ public class CENTRAL extends GenericRoute {
 	public CENTRAL() {
 		name = "Central Campus Southside";
 		xml = R.raw.ctimes;
-	}
-	
-	public static String[] getStops(Context c) {
-		stops = c.getResources().getStringArray(R.array.c_stops);
-		return stops;
+		stopsArray = R.array.c_stops;
 	}
 }

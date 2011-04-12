@@ -19,7 +19,6 @@
  ******************************************************************************/
 package net.jessechen.berkeleycampusshuttle.routes;
 
-import android.content.Context;
 import net.jessechen.berkeleycampusshuttle.R;
 
 /**
@@ -35,10 +34,6 @@ public class HILL extends GenericRoute {
 	public HILL() {
 		name = "Hill";
 		xml = R.raw.htimes;
-	}
-
-	public static String[] getStops(Context c) {
-		stops = c.getResources().getStringArray(R.array.h_stops);
-		return stops;
+		stopsArray = R.array.h_stops;
 	}
 }

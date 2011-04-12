@@ -66,7 +66,6 @@ public class Route extends Activity {
 		title.setText("Stops for " + routeName);
 
 		busStops = b.getStringArray("route");
-		java.util.Arrays.sort(busStops);
 
 		lv = (ListView) findViewById(R.id.l_stops);
 		lvAdapter = new ArrayAdapter<String>(this, R.layout.list_item, busStops);
@@ -106,7 +105,7 @@ public class Route extends Activity {
 		}
 		stop = (String) lv.getItemAtPosition(info.position);
 		FileHandler
-				.writeToFile(getApplicationContext(), routeName + "," + stop);
+				.writeToFile(getApplicationContext(), routeName + FileHandler.TOKEN + stop);
 		return true;
 	}
 }

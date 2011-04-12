@@ -44,6 +44,7 @@ import android.widget.Toast;
  */
 public class FileHandler extends Activity {
 
+	public final static String TOKEN = ",";
 	private static ArrayList<String> myFavorites = new ArrayList<String>();
 
 	@Override

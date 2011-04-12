@@ -19,7 +19,6 @@
  ******************************************************************************/
 package net.jessechen.berkeleycampusshuttle.routes;
 
-import android.content.Context;
 import net.jessechen.berkeleycampusshuttle.R;
 
 /**
@@ -35,10 +34,6 @@ public class REVERSE extends GenericRoute {
 	public REVERSE() {
 		name = "Reverse";
 		xml = R.raw.rtimes;
-	}
-
-	public static String[] getStops(Context c) {
-		stops = c.getResources().getStringArray(R.array.r_stops);
-		return stops;
+		stopsArray = R.array.r_stops;
 	}
 }
