@@ -64,6 +64,5 @@
 		android:layout_marginLeft="60dp"
 		android:layout_marginRight="60dp"
 		android:layout_alignParentBottom="true" 
-		android:text="@string/addtofav" 
 		android:id="@+id/b_addtofav"/>  
 </RelativeLayout>

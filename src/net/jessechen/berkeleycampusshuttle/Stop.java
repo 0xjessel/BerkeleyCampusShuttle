@@ -33,7 +33,8 @@ import org.xml.sax.XMLReader;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -52,15 +53,20 @@ import android.widget.Toast;
  * 
  */
 public class Stop extends Activity {
-	private static Bundle b;
-	private static CharSequence busStop, routeName;
-	private static Calendar calendar;
-	private static TextView title, countdown1, countdown2, countdown3;
-	private static int[][] result;
-	private static int hourRemaining, minuteRemaining, curHour, curMinute,
-			dayOfWeek;
+	private Bundle b;
+	private static CharSequence busStop;
+	private static CharSequence routeName;
+	private Calendar calendar;
+	private TextView title, countdown1, countdown2, countdown3;
+	private int[][] result;
+	private int hourRemaining, minuteRemaining;
+	private static int curHour;
+	private static int curMinute;
+	private int dayOfWeek;
 	private MyCount counter1, counter2, counter3;
-	private static Button addToFavButton;
+	private Button favButton;
+	private boolean inFavorites;
+	private String toFavorite;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -81,14 +87,51 @@ public class Stop extends Activity {
 
 		calculate();
 
-		addToFavButton = (Button) findViewById(R.id.b_addtofav);
-		addToFavButton.setOnClickListener(new OnClickListener() {
+		toFavorite = routeName + FileHandler.TOKEN + busStop;
+
+		favButton = (Button) findViewById(R.id.b_addtofav);
+
+		if (inFavorites = FileHandler.inFavorites(getApplicationContext(),
+				toFavorite)) {
+			favButton.setText("Remove from Favorites");
+		} else {
+			favButton.setText("Add to Favorites");
+		}
+
+		favButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				startActivity(new Intent(Stop.this, FileHandler.class));
-				FileHandler.writeToFile(getApplicationContext(), routeName
-						+ FileHandler.TOKEN + busStop);
+				if (inFavorites) {
+					setAlertDialog();
+				} else {
+					FileHandler
+							.writeToFile(getApplicationContext(), toFavorite);
+					favButton.setText("Remove from Favorites");
+					inFavorites = true;
+				}
 			}
 		});
+	}
+
+	private void setAlertDialog() {
+		DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int which) {
+				switch (which) {
+				case DialogInterface.BUTTON_POSITIVE:
+					FileHandler.deleteLine(getApplicationContext(), toFavorite);
+					favButton.setText("Add to Favorites");
+					inFavorites = false;
+				case DialogInterface.BUTTON_NEGATIVE:
+					dialog.cancel();
+				}
+			}
+		};
+
+		AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+		alertbox.setMessage(
+				"Are you sure you want remove this stop from your Favorites?")
+				.setPositiveButton("Yes", dialogClickListener)
+				.setNegativeButton("No", dialogClickListener).show();
 	}
 
 	/**

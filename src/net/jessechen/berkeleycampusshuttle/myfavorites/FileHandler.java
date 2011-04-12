@@ -57,28 +57,110 @@ public class FileHandler extends Activity {
 	 * into a neater String[].
 	 * 
 	 * This is also used prior to writing to the file to check if the specified
-	 * stop is already in the file. 
+	 * stop is already in the file.
 	 * 
 	 * @param context
 	 * @return a String[] representation of the file contents split by newline
+	 * @throws FileNotFoundException
 	 */
-	public static String[] readFileWrapper(Context context) {
+	public static String[] readFileWrapper(Context context)
+			throws FileNotFoundException {
 		String tempFavorites = null;
 		String[] favorites = null;
 		String[] trimFavorites = null;
 		int toCopy;
-		try {
-			tempFavorites = readFile(context);
-			favorites = tempFavorites.split("\n");
-			// trim junk off
-			toCopy = (favorites.length > 1) ? favorites.length - 1 : 0;
-			trimFavorites = new String[toCopy];
-			System.arraycopy(favorites, 0, trimFavorites, 0, toCopy);
+		tempFavorites = readFile(context);
+		favorites = tempFavorites.split("\n");
+		// trim junk off
+		toCopy = (favorites.length > 1) ? favorites.length - 1 : 0;
+		trimFavorites = new String[toCopy];
+		System.arraycopy(favorites, 0, trimFavorites, 0, toCopy);
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
 		return trimFavorites;
+	}
+
+	/**
+	 * checks if string data is in favorites.dat
+	 * 
+	 * @param c
+	 * @param data
+	 * @return true if string data is in favorites.dat, false if not found
+	 * @throws IOException
+	 */
+	public static boolean inFavorites(Context c, String data) {
+		BufferedReader reader;
+		try {
+			reader = new BufferedReader(new InputStreamReader(
+					c.openFileInput("favorites.dat")));
+
+			String currentLine;
+
+			while ((currentLine = reader.readLine()) != null) {
+				String trimmedLine = currentLine.trim();
+				if (trimmedLine.equals(data)) {
+					return true;
+				}
+			}
+
+			reader.close();
+
+		} catch (IOException e) {
+			Toast.makeText(c, "Something bad happened...", Toast.LENGTH_SHORT)
+					.show();
+		}
+
+		return false;
+	}
+
+	/**
+	 * copies the file to a temp file except for the specified String, and at
+	 * the end, it renames the temp file to the original.
+	 * 
+	 * @param c
+	 * @param toDelete
+	 *            string that you wish to delete from file
+	 * @return true, if operation was successful
+	 * @throws IOException
+	 */
+	public static boolean deleteLine(Context c, String toDelete) {
+		try {
+			File inputFile = new File(
+					"/data/data/net.jessechen.berkeleycampusshuttle/files/favorites.dat");
+			File tempFile = new File(
+					"/data/data/net.jessechen.berkeleycampusshuttle/files/favorites.tmp");
+
+			FileOutputStream fOut = c.openFileOutput("favorites.tmp",
+					MODE_APPEND);
+
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					c.openFileInput("favorites.dat")));
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+					fOut));
+
+			String currentLine;
+
+			while ((currentLine = reader.readLine()) != null) {
+				String trimmedLine = currentLine.trim();
+				if (trimmedLine.equals(toDelete)) {
+					myFavorites.remove(currentLine);
+					continue;
+				}
+				writer.write(currentLine);
+				writer.newLine();
+				writer.flush();
+			}
+
+			writer.close();
+			reader.close();
+
+			Toast.makeText(c, "Removed from Favorites", Toast.LENGTH_SHORT)
+					.show();
+
+			return tempFile.renameTo(inputFile);
+		} catch (IOException e) {
+			Toast.makeText(c, "Delete failed", Toast.LENGTH_SHORT).show();
+		}
+		return false;
 	}
 
 	/**
@@ -102,7 +184,9 @@ public class FileHandler extends Activity {
 			String[] favorites = readFileWrapper(context);
 
 			for (String favorite : favorites) {
-				myFavorites.add(favorite);
+				if (!myFavorites.contains(favorite)) {
+					myFavorites.add(favorite);
+				}
 			}
 
 			if (!myFavorites.contains(data)) {
@@ -136,74 +220,27 @@ public class FileHandler extends Activity {
 	}
 
 	/**
-	 * copies the file to a temp file except for the specified String, and at
-	 * the end, it renames the temp file to the original.
-	 * 
-	 * @param context
-	 * @param toDelete
-	 *            string that you wish to delete from file
-	 * @return true, if operation was successful
-	 * @throws IOException
-	 */
-	protected static boolean deleteLine(Context context, String toDelete)
-			throws IOException {
-
-		File inputFile = new File(
-				"/data/data/net.jessechen.berkeleycampusshuttle/files/favorites.dat");
-		File tempFile = new File(
-				"/data/data/net.jessechen.berkeleycampusshuttle/files/favorites.tmp");
-
-		FileOutputStream fOut = context.openFileOutput("favorites.tmp",
-				MODE_APPEND);
-
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				context.openFileInput("favorites.dat")));
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fOut));
-
-		String currentLine;
-
-		while ((currentLine = reader.readLine()) != null) {
-			String trimmedLine = currentLine.trim();
-			if (trimmedLine.equals(toDelete)) {
-				myFavorites.remove(currentLine);
-				continue;
-			}
-			writer.write(currentLine);
-			writer.newLine();
-			writer.flush();
-		}
-
-		writer.close();
-		reader.close();
-
-		return tempFile.renameTo(inputFile);
-	}
-
-	/**
 	 * Reads favorites.dat and outputs it in a String, use readFileWrapper to
 	 * have it convert the string into a string array split by newline
 	 * 
-	 * @param context
+	 * @param c
 	 * @return string representation of favorites.dat
 	 * @throws FileNotFoundException
 	 */
-	protected static String readFile(Context context)
-			throws FileNotFoundException {
+	protected static String readFile(Context c) throws FileNotFoundException {
 		FileInputStream fIn = null;
 		InputStreamReader isr = null;
 		char[] inputBuffer = new char[255];
 		String data = null;
 		try {
-			fIn = context.openFileInput("favorites.dat");
+			fIn = c.openFileInput("favorites.dat");
 			isr = new InputStreamReader(fIn);
 			isr.read(inputBuffer);
 			data = new String(inputBuffer);
-		} catch (FileNotFoundException f) {
-			throw f;
 		} catch (Exception e) {
 			e.printStackTrace();
-			Toast.makeText(context, "Something went wrong..",
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(c, "Something went wrong..", Toast.LENGTH_SHORT)
+					.show();
 		} finally {
 			try {
 				if (isr != null)

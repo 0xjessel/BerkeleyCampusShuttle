@@ -19,7 +19,7 @@
  ******************************************************************************/
 package net.jessechen.berkeleycampusshuttle.myfavorites;
 
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -45,7 +45,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * MyFavorites is the activity that display favorite stops that the user has
@@ -71,14 +70,18 @@ public class MyFavorites extends Activity {
 		setContentView(R.layout.myfavorites);
 
 		lv = (ListView) findViewById(R.id.l_favorites);
-		favorites = FileHandler.readFileWrapper(this);
+		try {
+			favorites = FileHandler.readFileWrapper(this);
 
-		lvAdapter = new mAdapter(this, R.layout.favlist_item,
-				new ArrayList<String>(Arrays.asList(favorites)));
-		if (lvAdapter.getCount() == 0) {
+			lvAdapter = new mAdapter(this, R.layout.favlist_item,
+					new ArrayList<String>(Arrays.asList(favorites)));
+			if (lvAdapter.getCount() == 0) {
+				setOnEmpty();
+			}
+			lv.setAdapter(lvAdapter);
+		} catch (FileNotFoundException e) {
 			setOnEmpty();
 		}
-		lv.setAdapter(lvAdapter);
 		registerForContextMenu(lv);
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
@@ -118,19 +121,30 @@ public class MyFavorites extends Activity {
 			return false;
 		}
 		String stop = (String) lv.getItemAtPosition(info.position);
-		try {
-			FileHandler.deleteLine(getApplicationContext(), stop);
-			lvAdapter.remove(stop);
-			lvAdapter.notifyDataSetChanged();
-			if (lvAdapter.getCount() == 0) {
-				setOnEmpty();
-			}
-		} catch (IOException e) {
-			Toast.makeText(getApplicationContext(), "Delete failed",
-					Toast.LENGTH_SHORT).show();
-			return false;
+		FileHandler.deleteLine(getApplicationContext(), stop);
+		lvAdapter.remove(stop);
+		lvAdapter.notifyDataSetChanged();
+		if (lvAdapter.getCount() == 0) {
+			setOnEmpty();
 		}
 		return true;
+	}
+
+	/*
+	 * If you remove a stop from Favorites, pressing back afterwards should
+	 * update the lvAdapter by having that stop no longer be in Favorites.
+	 * 
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onResume()
+	 */
+	@Override
+	public void onResume() { // TODO: doesn't work
+		super.onResume();
+		lvAdapter.notifyDataSetChanged();
+		if (lvAdapter.getCount() == 0) {
+			setOnEmpty();
+		}
 	}
 
 	/**
