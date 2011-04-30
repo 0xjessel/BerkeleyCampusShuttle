@@ -31,14 +31,8 @@ public class SaxyParser extends DefaultHandler {
 	private int hour, numResults = 0;
 	private StringBuilder buf = null;
 	public static final int TOTAL_MINS = 3;
-	private static int result[][] = { { -1, -1 }, { -1, -1 }, { -1, -1 } }; // return
-																			// 3
-																			// predictions,
-																			// each
-																			// with
-																			// hour
-																			// and
-																			// minute
+	private static int result[][] = { { -1, -1 }, { -1, -1 }, { -1, -1 } };
+	// return 3 predictions, each with hour and minute
 
 	@Override
 	public void startDocument() throws SAXException {
@@ -103,10 +97,10 @@ public class SaxyParser extends DefaultHandler {
 			}
 		}
 		if (localName.equals("hour")) {
-			if (!done) { 
+			if (!done) {
 				// did not find a valid minute value in this hour
 				// then reset boolean values
-				same_hour = false; 
+				same_hour = false;
 				correct_hour = false;
 			}
 

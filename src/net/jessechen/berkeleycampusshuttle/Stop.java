@@ -229,11 +229,11 @@ public class Stop extends Activity {
 					minute = "0" + minute;
 				}
 			}
-			hour = Integer.toString(result[index][0] % 12); // add am and pm
+			hour = Integer.toString(result[index][0] % 12); // am or pm
 			if (hour == "0") {
 				hour = "12";
 			}
-			if (result[index][0] > 12) {
+			if (result[index][0] >= 12) {
 				ampm = "pm";
 			} else {
 				ampm = "am";
