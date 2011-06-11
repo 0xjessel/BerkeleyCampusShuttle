@@ -34,6 +34,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -54,16 +55,18 @@ import android.widget.Toast;
  */
 public class Stop extends Activity {
 	private Bundle b;
-	private static CharSequence busStop;
-	private static CharSequence routeName;
-	private Calendar calendar;
-	private TextView title, countdown1, countdown2, countdown3;
-	private int[][] result;
-	private int hourRemaining, minuteRemaining;
-	private static int curHour;
-	private static int curMinute;
-	private int dayOfWeek;
-	private MyCount counter1, counter2, counter3;
+	private static CharSequence busStop, routeName;
+	private static Calendar cal;
+	private TextView title;
+	private static TextView countdown1;
+	private static TextView countdown2;
+	private static TextView countdown3;
+	private static int[][] result;
+	private static int hourRemaining, minuteRemaining, curHour, curMinute,
+			dayOfWeek, busXml;
+	private static MyCount counter1;
+	private static MyCount counter2;
+	private static MyCount counter3;
 	private Button favButton;
 	private boolean inFavorites;
 	private String toFavorite;
@@ -75,6 +78,7 @@ public class Stop extends Activity {
 		setContentView(R.layout.stop);
 
 		b = getIntent().getExtras();
+		busXml = b.getInt("xml");
 		busStop = b.getCharSequence("stop");
 		routeName = b.getCharSequence("route");
 
@@ -85,7 +89,10 @@ public class Stop extends Activity {
 		countdown2 = (TextView) findViewById(R.id.countdown2);
 		countdown3 = (TextView) findViewById(R.id.countdown3);
 
-		calculate();
+		cal = Calendar.getInstance();
+		calculate(countdown1, cal, this, 0, counter1, busXml);
+		calculate(countdown2, cal, this, 1, counter2, busXml);
+		calculate(countdown3, cal, this, 2, counter3, busXml);
 
 		toFavorite = routeName + FileHandler.TOKEN + busStop;
 
@@ -101,12 +108,13 @@ public class Stop extends Activity {
 		favButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (inFavorites) {
-					setAlertDialog();
-				} else {
-					FileHandler
-							.writeToFile(getApplicationContext(), toFavorite);
-					favButton.setText("Remove from Favorites");
-					inFavorites = true;
+					setAlertDialog(); // prompt to remove from fav
+				} else { // add to fav
+					if (FileHandler.writeToFile(getApplicationContext(),
+							toFavorite) == true) {
+						favButton.setText("Remove from Favorites");
+						inFavorites = true;
+					}
 				}
 			}
 		});
@@ -141,64 +149,63 @@ public class Stop extends Activity {
 	 * weekend (campus shuttle does not run on weekends).
 	 * 
 	 */
-	public void calculate() {
-		countdown1.invalidate(); // do i need this
-		countdown2.invalidate();
-		countdown3.invalidate();
+	public static void calculate(TextView t, Calendar c, Context cx, int id,
+			CountDownTimer counter, int xml) {
+		t.invalidate(); // do i need this
 
-		calendar = Calendar.getInstance();
-		curHour = calendar.get(Calendar.HOUR_OF_DAY);
-		curMinute = calendar.get(Calendar.MINUTE);
-		dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+		curHour = c.get(Calendar.HOUR_OF_DAY);
+		curMinute = c.get(Calendar.MINUTE);
+		dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
 
 		if (dayOfWeek != Calendar.SUNDAY && dayOfWeek != Calendar.SATURDAY) {
 			try {
-				result = getEventsFromAnXML(this, b.getInt("xml"), busStop);
+				result = getEventsFromAnXML(cx, xml, busStop);
 			} catch (XmlPullParserException e) {
-				Toast.makeText(getApplicationContext(),
-						"A fatal error occured.  Report it!",
+				Toast.makeText(cx, "A fatal error occured.  Report it!",
 						Toast.LENGTH_SHORT).show();
 			} catch (IOException e) {
-				Toast.makeText(getApplicationContext(),
-						"A fatal error occured.  Report it!",
+				Toast.makeText(cx, "A fatal error occured.  Report it!",
 						Toast.LENGTH_SHORT).show();
 			}
 
-			if (result[0][0] != -1) { // first hour result is -1, no more
-										// predictions for the day
-				if (result[0][0] != -1) {
-					hourRemaining = (result[0][0] - curHour);
-					minuteRemaining = (result[0][1] - curMinute);
-					counter1 = new MyCount(countdown1, 0, hourRemaining
-							* 3600000 + minuteRemaining * 60000, 1000);
-					counter1.start();
-				} else {
-					countdown1.setText("");
-				}
-				if (result[1][0] != -1) {
-					hourRemaining = (result[1][0] - curHour);
-					minuteRemaining = (result[1][1] - curMinute);
-					counter2 = new MyCount(countdown2, 1, hourRemaining
-							* 3600000 + minuteRemaining * 60000, 1000);
-					counter2.start();
-				} else {
-					countdown2.setText("");
-				}
-				if (result[2][0] != -1) {
-					hourRemaining = (result[2][0] - curHour);
-					minuteRemaining = (result[2][1] - curMinute);
-					counter3 = new MyCount(countdown3, 2, hourRemaining
-							* 3600000 + minuteRemaining * 60000, 1000);
-					counter3.start();
-				} else {
-					countdown3.setText("");
+			// if first hour result is -1 then no more predictions for the day
+			if (result[0][0] != -1) {
+				if (id == 0) {
+					if (result[0][0] != -1) {
+						hourRemaining = (result[0][0] - curHour);
+						minuteRemaining = (result[0][1] - curMinute);
+						counter = new Stop.MyCount(t, cx, 0, hourRemaining * 3600000
+								+ minuteRemaining * 60000, 1000);
+						counter.start();
+					} else {
+						t.setText("");
+					}
+				} else if (id == 1) {
+					if (result[1][0] != -1) {
+						hourRemaining = (result[1][0] - curHour);
+						minuteRemaining = (result[1][1] - curMinute);
+						counter = new MyCount(t, cx, 1, hourRemaining * 3600000
+								+ minuteRemaining * 60000, 1000);
+						counter.start();
+					} else {
+						t.setText("");
+					}
+				} else if (id == 2) {
+					if (result[2][0] != -1) {
+						hourRemaining = (result[2][0] - curHour);
+						minuteRemaining = (result[2][1] - curMinute);
+						counter = new MyCount(t, cx, 2, hourRemaining * 3600000
+								+ minuteRemaining * 60000, 1000);
+						counter.start();
+					} else {
+						t.setText("");
+					}
 				}
 			} else {
-				countdown1.setText("No more predictions for the day");
+				t.setText("No more predictions for the day");
 			}
 		} else {
-			countdown1
-					.setText("Campus shuttle does not run during the weekends");
+			t.setText("Campus shuttle does not run during the weekends");
 		}
 	}
 
@@ -213,14 +220,16 @@ public class Stop extends Activity {
 	 * @author Jesse Chen
 	 * 
 	 */
-	public class MyCount extends CountDownTimer {
+	public static class MyCount extends CountDownTimer {
 		private TextView tv;
+		private Context c;
 		private String subString, minute, hour, ampm;
 
-		public MyCount(TextView cd, int index, long millisInFuture,
+		public MyCount(TextView cd, Context cx, int index, long millisInFuture,
 				long countDownInterval) {
 			super(millisInFuture, countDownInterval);
 			tv = cd;
+			c = cx;
 			minute = Integer.toString(result[index][1]);
 			if (minute.length() == 1) { // append extra 0 for formatting
 				if (minute == "0") {
@@ -229,7 +238,7 @@ public class Stop extends Activity {
 					minute = "0" + minute;
 				}
 			}
-			hour = Integer.toString(result[index][0] % 12); // add am and pm
+			hour = Integer.toString(result[index][0] % 12); // add am or pm
 			if (hour == "0") {
 				hour = "12";
 			}
@@ -255,7 +264,10 @@ public class Stop extends Activity {
 			if (counter3 != null) {
 				counter3.cancel();
 			}
-			calculate();
+			cal = Calendar.getInstance();
+			calculate(countdown1, cal, c, 0, counter1, busXml);
+			calculate(countdown2, cal, c, 1, counter2, busXml);
+			calculate(countdown3, cal, c, 2, counter3, busXml);
 		}
 
 		@Override
@@ -277,7 +289,6 @@ public class Stop extends Activity {
 	 * efficient than DOMParsers since SAX only has to run through the XML file
 	 * once. I aim to keep it fast (even if it is negligible) by design choice.
 	 * 
-	 * @param activity
 	 * @param xml
 	 * @param stop
 	 *            name of the specified stop
@@ -287,12 +298,13 @@ public class Stop extends Activity {
 	 * @throws XmlPullParserException
 	 * @throws IOException
 	 */
-	private int[][] getEventsFromAnXML(Activity activity, int xml,
+	private static int[][] getEventsFromAnXML(Context cx, int xml,
 			CharSequence stop) throws XmlPullParserException, IOException {
 		InputStream istream = null;
 		int[][] result = null;
 		try {
-			istream = activity.getResources().openRawResource(xml);
+			// taking out activity parameter and using 'this'.  can be disasterous
+			istream = cx.getResources().openRawResource(xml);
 			/* Get a SAXParser from the SAXPArserFactory. */
 			SAXParserFactory spf = SAXParserFactory.newInstance();
 			SAXParser sp = spf.newSAXParser();

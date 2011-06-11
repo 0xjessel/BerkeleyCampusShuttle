@@ -18,7 +18,7 @@
   You should have received a copy of the GNU General Public License along with
   Berkeley Campus Shuttle.  If not, see http://www.gnu.org/licenses/.
 -->
-<LinearLayout
+<RelativeLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		android:padding="6dp"
 		android:layout_width="fill_parent"
@@ -31,7 +31,16 @@
 	<TextView 
 		android:id="@+id/favlisttext"
 		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/favlistpic"
 		android:padding="5dp"
 		android:textSize="16dp"/>
-</LinearLayout>
+	<TextView
+		android:id="@+id/favlistpredict"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/favlistpic"
+		android:layout_below="@id/favlisttext"
+		android:padding="5dp"
+		android:textSize="12dp"/>
+</RelativeLayout>

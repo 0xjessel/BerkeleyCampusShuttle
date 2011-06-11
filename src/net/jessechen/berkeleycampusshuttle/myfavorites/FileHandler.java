@@ -171,7 +171,7 @@ public class FileHandler extends Activity {
 	 * @param data
 	 *            string to be written
 	 */
-	public static void writeToFile(Context context, String data) {
+	public static boolean writeToFile(Context context, String data) {
 		FileOutputStream fOut = null;
 		BufferedWriter writer = null;
 
@@ -181,6 +181,7 @@ public class FileHandler extends Activity {
 
 			data.trim();
 
+			// read file to see if data already exists
 			String[] favorites = readFileWrapper(context);
 
 			for (String favorite : favorites) {
@@ -194,21 +195,27 @@ public class FileHandler extends Activity {
 				writer.write(data);
 				writer.newLine();
 				writer.flush();
-				String toToast = data.replace(",", ": ");
+				
+				String forToast = data.replace(",", ": ");
 				Toast.makeText(context,
-						toToast + " has been added to your Favorites!",
+						forToast + " has been added to your Favorites!",
 						Toast.LENGTH_SHORT).show();
+				
+				return true;
 			} else {
 				Toast.makeText(context, "Already in your Favorites!",
 						Toast.LENGTH_SHORT).show();
+				return false;
 			}
 		} catch (FileNotFoundException f) {
 			f.printStackTrace();
 			Toast.makeText(context, "File not found", Toast.LENGTH_SHORT);
+			return false;
 		} catch (Exception e) {
 			e.printStackTrace();
 			Toast.makeText(context, "Error: did not save", Toast.LENGTH_SHORT)
 					.show();
+			return false;
 		} finally {
 			try {
 				writer.close();

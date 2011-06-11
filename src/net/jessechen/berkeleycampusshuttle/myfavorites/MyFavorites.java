@@ -22,6 +22,7 @@ package net.jessechen.berkeleycampusshuttle.myfavorites;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
 import net.jessechen.berkeleycampusshuttle.R;
 import net.jessechen.berkeleycampusshuttle.Stop;
@@ -192,27 +193,36 @@ public class MyFavorites extends Activity {
 			if (l != null) {
 				String[] item = l.split(",");
 				TextView t = (TextView) v.findViewById(R.id.favlisttext);
+				TextView t2 = (TextView) v.findViewById(R.id.favlistpredict);
 				ImageView img = (ImageView) v.findViewById(R.id.favlistpic);
-
-				t.setText(item[1]);
-
+				
+				int routeXml = 0;
 				if (item[0].equals(PERIMETER.getName())) {
+					routeXml = PERIMETER.getXML();
 					img.setImageResource(R.drawable.p);
 					img.setContentDescription(PERIMETER.getName() + ","
-							+ Integer.toString(PERIMETER.getXML()));
+							+ Integer.toString(routeXml));
 				} else if (item[0].equals(REVERSE.getName())) {
+					routeXml = REVERSE.getXML();
 					img.setImageResource(R.drawable.r);
 					img.setContentDescription(REVERSE.getName() + ","
-							+ Integer.toString(REVERSE.getXML()));
+							+ Integer.toString(routeXml));
 				} else if (item[0].equals(CENTRAL.getName())) {
+					routeXml = CENTRAL.getXML();
 					img.setImageResource(R.drawable.c);
 					img.setContentDescription(CENTRAL.getName() + ","
-							+ Integer.toString(CENTRAL.getXML()));
+							+ Integer.toString(routeXml));
 				} else if (item[0].equals(HILL.getName())) {
+					routeXml = HILL.getXML();
 					img.setImageResource(R.drawable.h);
 					img.setContentDescription(HILL.getName() + ","
-							+ Integer.toString(HILL.getXML()));
+							+ Integer.toString(routeXml));
 				}
+				
+				t.setText(item[1]);
+				Calendar c = Calendar.getInstance();
+				Stop.MyCount counter = null;
+				Stop.calculate(t2, c, getApplicationContext(), 0, counter, routeXml);
 			}
 			return v;
 		}
