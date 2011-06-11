@@ -52,16 +52,16 @@
 		<item>Buchanon and Jackson St (West)</item>
 	</string-array>
 	<string-array name="p_stops">
-		<item>Downtown Berkeley BART Station: Shattuck Ave and Addison St
+		<item>Downtown Berkeley BART Station: Shattuck Avenue @ Addison Street
 		</item>
-		<item>Tolman Hall: Hearst Ave and Arch St</item>
-		<item>Cory Hall: Hearst Ave and LeRoy Ave</item>
-		<item>Gayley and Stadium Rimway</item>
-		<item>International House: Piedmont Ave and Bancroft Way</item>
-		<item>Hearst Memorial Gym: Bancroft Way and Bowditch St</item>
-		<item>Recreational Sports Facility: Bancroft Way and Ellsworth St
+		<item>Tolman Hall: Hearst Avenue @ Arch Street</item>
+		<item>Cory Hall: Hearst Avenue @ LeRoy Avenue</item>
+		<item>Gayley @ Stadium Rimway</item>
+		<item>International House: Piedmont Avenue @ Bancroft Way</item>
+		<item>Hearst Memorial Gym: Bancroft Way @ Bowditch</item>
+		<item>Recreational Sports Facility: Bancroft Way @ Ellsworth Street
 		</item>
-		<item>Shattuck Ave and Kittredge St</item>
+		<item>Shattuck Avenue @ Kittredge Street</item>
 	</string-array>
 	<string-array name="r_stops">
 		<item>Downtown Berkeley BART Station: Shattuck Ave and Addison St
